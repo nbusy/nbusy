@@ -3,3 +3,6 @@ Social networking platform built with [Angular](http://angularjs.org/) and [Node
 
 ## Tech Stack
 For technological and architectural overview, have a look at this [blog post](http://www.soygul.com/projects/nbusy/).
+
+## Project Template
+This project uses [KOAN](https://github.com/soygul/koan) (Koa, AngularJS, Node.js) Stack as the project template.
