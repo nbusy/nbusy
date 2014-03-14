@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" ng-app="koan" ng-controller="layout">
+<head>
+  <meta charset="utf-8">
+  <title ng-bind="layout.title">KOAN Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // authentication check before anything
+    var token = window.sessionStorage.token || window.localStorage.token,
+        user = token && JSON.parse(window.sessionStorage.user || window.localStorage.user);
+    if (!token || !user || user.exp < Math.round(new Date().getTime() / 1000)) {
+      // token is non-existent, invalid, or expired so redirect to login page
+      window.location.replace('/login.html');
+    }
+  </script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img class="brand-image" src="img/koan.png" alt="KOAN"/>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-flag"></span>
+            Notifications
+            <span class="badge">{{layout.user.notifications.length}}</span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="notification in layout.user.notifications">
+              <div style="min-width: 300px; padding-left: 15px">
+                <span class="glyphicon glyphicon-user"></span>
+                <a ng-href="/users/{{notification.from.id}}">{{notification.from.name}}</a> sent you a friend request
+                <button type="button" class="btn btn-info btn-xs" ng-click="layout.acceptFriendRequest(notification.from.id)">
+                  <span class="glyphicon glyphicon-ok"></span> Accept
+                </button>
+                <button type="button" class="btn btn-default btn-xs" ng-click="layout.rejectFriendRequest(notification.from.id)">
+                  <span class="glyphicon glyphicon-remove"></span> Reject
+                </button>
+              </div>
+            </li>
+            <li ng-if="!layout.user.notifications" class="dropdown-header">No new notifications</li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-envelope"></span>
+            Messages
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">No unread messages</li>
+            <li class="divider"></li>
+            <li>
+              <a href="/messages"><span class="glyphicon glyphicon-envelope"></span> All Messages</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <form ng-submit="layout.search()" class="navbar-form navbar-left">
+        <div class="form-group">
+          <input name="q" type="text" ng-model="layout.searchQuery" class="form-control" placeholder="Search for people">
+        </div>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img ng-src="{{layout.user.pictureUrl}}" alt=""/>
+            <i class="self-online-indicator" ng-style="layout.onlineIndicatorStyle"></i>
+            {{layout.user.name}} <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="" ng-click="layout.logout()">Logout</a></li>
+          </ul>
+        </li>
+        <li><a href="/">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav nav-pills nav-stacked sidenav">
+        <li ng-class="layout.active.home"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li ng-class="layout.active.messages"><a href="/messages"><span class="glyphicon glyphicon-envelope"></span>
+          Messages</a></li>
+      </ul>
+    </div>
+    <div class="col-md-7" ng-view></div>
+    <div class="col-md-3"></div>
+  </div>
+  <hr>
+  <footer>
+    <p>
+      <span>KOAN &copy; 2014</span> &middot;
+      <span><a href="https://github.com/soygul/koan">GitHub Repo</a></span>
+    </p>
+  </footer>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/lodash/dist/lodash.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>

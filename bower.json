@@ -1,0 +1,15 @@
+{
+  "name": "koan",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "jquery": "latest",
+    "bootstrap": "latest",
+    "angular-route": "latest",
+    "lodash": "latest"
+  },
+  "devDependencies": {
+    "angular-mocks": "latest",
+    "angular-scenario": "latest"
+  }
+}
