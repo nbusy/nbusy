@@ -12,6 +12,14 @@ var baseConfig = {
     root: path.normalize(__dirname + '/../..'),
     env: process.env.NODE_ENV,
     secret: 'secret key' /* used in signing the jwt tokens */
+  },
+  oauth: {
+    facebook: {
+      clientSecret: process.env.FACEBOOK_SECRET
+    },
+    google: {
+      clientSecret: process.env.GOOGLE_SECRET
+    }
   }
 };
 
@@ -21,17 +29,15 @@ var platformConfig = {
       port: 3000
     },
     mongo: {
-      url: 'mongodb://localhost:27017/koan-dev'
+      url: 'mongodb://localhost:27017/nbusy-dev'
     },
     oauth: {
       facebook: {
-        clientId: '231235687068678',
-        clientSecret: '4a90381c6bfa738bb18fb7d6046c14b8',
+        clientId: '194890683879045',
         callbackUrl: 'http://localhost:3000/signin/facebook/callback'
       },
       google: {
-        clientId: '147832090796-ckhu1ehvsc8vv9nso7iefvu5fi7jrsou.apps.googleusercontent.com',
-        clientSecret: 'MGOwKgcLPEfCsLjcJJSPeFYu',
+        clientId: '218602439235-6g09g0ap6i8v25v3rel49rtqjcu9ppj0.apps.googleusercontent.com',
         callbackUrl: 'http://localhost:3000/signin/google/callback'
       }
     }
@@ -42,7 +48,7 @@ var platformConfig = {
       port: 3001
     },
     mongo: {
-      url: 'mongodb://localhost:27017/koan-test'
+      url: 'mongodb://localhost:27017/nbusy-test'
     }
   },
 
@@ -52,18 +58,16 @@ var platformConfig = {
       cacheTime: 7 * 24 * 60 * 60 * 1000 /* default caching time (7 days) for static files, calculated in milliseconds */
     },
     mongo: {
-      url: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/koan'
+      url: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/nbusy'
     },
     oauth: {
       facebook: {
-        clientId: '231235687068678',
-        clientSecret: '4a90381c6bfa738bb18fb7d6046c14b8',
-        callbackUrl: 'http://koanjs.com/signin/facebook/callback'
+        clientId: '194890683879045',
+        callbackUrl: 'https://nbusy.com/signin/facebook/callback'
       },
       google: {
-        clientId: '147832090796-ckhu1ehvsc8vv9nso7iefvu5fi7jrsou.apps.googleusercontent.com',
-        clientSecret: 'MGOwKgcLPEfCsLjcJJSPeFYu',
-        callbackUrl: 'http://koanjs.com/signin/google/callback'
+        clientId: '218602439235-6g09g0ap6i8v25v3rel49rtqjcu9ppj0.apps.googleusercontent.com',
+        callbackUrl: 'https://nbusy.com/signin/google/callback'
       }
     }
   }
