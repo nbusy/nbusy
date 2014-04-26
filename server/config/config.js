@@ -1,27 +1,39 @@
 'use strict';
 
-var path = require('path'),
-    _ = require('lodash');
-
 /**
  * Environment variables and application configuration.
  */
-var base = {
+
+var path = require('path'),
+    _ = require('lodash');
+
+var baseConfig = {
   app: {
     root: path.normalize(__dirname + '/../..'),
-    port: process.env.PORT || 3000,
-    env: process.env.NODE_ENV || 'development',
-    secret: 'secret key'
-  },
-  mongo: {
-    url: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/koan'
+    env: process.env.NODE_ENV,
+    secret: 'secret key' /* used in signing the jwt tokens */
   }
 };
 
-var platforms = {
+var platformConfig = {
   development: {
+    app: {
+      port: 3000
+    },
     mongo: {
       url: 'mongodb://localhost:27017/koan-dev'
+    },
+    oauth: {
+      facebook: {
+        clientId: '231235687068678',
+        clientSecret: '4a90381c6bfa738bb18fb7d6046c14b8',
+        callbackUrl: 'http://localhost:3000/signin/facebook/callback'
+      },
+      google: {
+        clientId: '147832090796-ckhu1ehvsc8vv9nso7iefvu5fi7jrsou.apps.googleusercontent.com',
+        clientSecret: 'MGOwKgcLPEfCsLjcJJSPeFYu',
+        callbackUrl: 'http://localhost:3000/signin/google/callback'
+      }
     }
   },
 
@@ -35,26 +47,27 @@ var platforms = {
   },
 
   production: {
-    passport: {
+    app: {
+      port: process.env.PORT || 3000,
+      cacheTime: 7 * 24 * 60 * 60 * 1000 /* default caching time (7 days) for static files, calculated in milliseconds */
+    },
+    mongo: {
+      url: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/koan'
+    },
+    oauth: {
       facebook: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/facebook/callback'
-      },
-      twitter: {
-        clientID: 'CONSUMER_KEY',
-        clientSecret: 'CONSUMER_SECRET',
-        callbackURL: 'http://localhost:3000/auth/twitter/callback'
+        clientId: '231235687068678',
+        clientSecret: '4a90381c6bfa738bb18fb7d6046c14b8',
+        callbackUrl: 'http://koanjs.com/signin/facebook/callback'
       },
       google: {
-        clientID: 'APP_ID',
-        clientSecret: 'APP_SECRET',
-        callbackURL: 'http://localhost:3000/auth/google/callback'
+        clientId: '147832090796-ckhu1ehvsc8vv9nso7iefvu5fi7jrsou.apps.googleusercontent.com',
+        clientSecret: 'MGOwKgcLPEfCsLjcJJSPeFYu',
+        callbackUrl: 'http://koanjs.com/signin/google/callback'
       }
     }
   }
 };
 
 // override the base configuration with the platform specific values
-_.merge(base, platforms[base.app.env]);
-module.exports = base;
+module.exports = _.merge(baseConfig, platformConfig[baseConfig.app.env || 'development']);

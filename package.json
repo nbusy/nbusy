@@ -1,8 +1,7 @@
 {
   "name": "koan",
   "version": "1.0.0",
-  "description": "KOAN - A Modern Web Development Stack: Koa, AngularJS, and Node.js.",
-  "author": "Teoman Soygul",
+  "description": "KOAN Stack (Koa, Angular, Node, Mongo, WebSockets) for real-time full-stack JavaScript web development.",
   "repository": {
     "type": "git",
     "url": "git://github.com/soygul/koan.git"
@@ -10,58 +9,44 @@
   "engines": {
     "node": ">=0.11.11"
   },
+  "author": {
+    "name": "Teoman Soygul",
+    "url": "http://www.soygul.com/"
+  },
   "scripts": {
-    "start": "node node_modules/grunt-cli/bin/grunt",
-    "test": "node node_modules/grunt-cli/bin/grunt test",
-    "postinstall": "node node_modules/bower/bin/bower install",
-    "postupdate": "node node_modules/bower/bin/bower update"
+    "start": "grunt",
+    "test": "node --debug --harmony node_modules/grunt-cli/bin/grunt test",
+    "postinstall": "bower install",
+    "postupdate": "bower update"
   },
   "dependencies": {
-    "koa": "latest",
-    "koa-route": "latest",
-    "koa-logger": "latest",
-    "koa-static": "latest",
-    "koa-jwt": "latest",
-    "jsonwebtoken": "latest",
-    "co": "latest",
-    "co-body": "latest",
-    "co-mongodb": "latest",
-    "lodash": "latest",
-
-    "ws": "latest",
-    "request": "latest",
-    "client-sessions": "latest",
-    "express-validator": "latest",
-    "koa-passport": "latest",
-    "passport-facebook": "latest",
-    "passport-twitter": "latest",
-    "passport-google-oauth": "latest",
-
-    "forever": "latest",
-    "bower": "latest",
-    "grunt-cli": "latest"
+    "koa": "~0",
+    "koa-route": "~1",
+    "koa-logger": "~1",
+    "koa-send": "~1",
+    "koa-jwt": "~0",
+    "koa-livereload": "~0",
+    "co": "~3",
+    "co-body": "~0",
+    "co-mongo": "~0",
+    "co-request": "~0",
+    "lodash": "~2",
+    "ws": "~0",
+    "forever": "~0",
+    "bower": "~1",
+    "grunt-cli": "~0"
   },
   "devDependencies": {
-    "mocha": "latest",
-    "should": "latest",
-    "sinon": "latest",
-    "supertest": "latest",
-
-    "phantomjs" : "latest",
-    "karma" : "latest",
-    "karma-chrome-launcher": "latest",
-    "karma-firefox-launcher": "latest",
-    "karma-phantomjs-launcher": "latest",
-    "karma-junit-reporter" : "latest",
-    "karma-jasmine" : "latest",
-    "protractor" : "latest",
-
-    "grunt-env": "latest",
-    "grunt-protractor-runner": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-nodemon": "latest",
-    "grunt-concurrent": "latest",
-    "grunt-mocha-test": "latest",
-    "grunt-karma": "latest"
+    "grunt-env": "~0",
+    "grunt-protractor-runner": "~0",
+    "grunt-contrib-watch": "~0",
+    "grunt-nodemon": "~0",
+    "grunt-concurrent": "~0",
+    "grunt-mocha-test": "~0",
+    "grunt-karma": "~0",
+    "karma-jasmine": "~0",
+    "karma-phantomjs-launcher": "~0",
+    "supertest": "~0",
+    "should": "~3"
   }
 }

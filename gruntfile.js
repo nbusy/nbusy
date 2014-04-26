@@ -1,7 +1,8 @@
 'use strict';
 
+var fs = require('fs');
+
 module.exports = function (grunt) {
-  // Project Configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     env: {
@@ -17,7 +18,7 @@ module.exports = function (grunt) {
         }
       },
       server: {
-        files: ['gruntfile.js', 'app.js', 'server/**'],
+        files: ['.nodemon'],
         options: {
           livereload: true
         }
@@ -27,7 +28,19 @@ module.exports = function (grunt) {
       dev: {
         script: 'app.js',
         options: {
-          nodeArgs: ['--debug', '--harmony']
+          nodeArgs: ['--debug', '--harmony'],
+          ignore: ['node_modules/**', 'client/**'],
+          callback: function (nodemon) {
+            fs.writeFileSync('.nodemon', 'started');
+            nodemon.on('log', function (event) {
+              console.log(event.colour);
+            });
+            nodemon.on('restart', function () {
+              setTimeout(function () {
+                fs.writeFileSync('.nodemon', 'restarted');
+              }, 250);
+            });
+          }
         }
       }
     },
@@ -38,24 +51,23 @@ module.exports = function (grunt) {
       }
     },
     mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['test/server/mocha/**/*.js']
+      server: {
+        src: ['test/server/**/*.js']
+      }
     },
     karma: {
       unit: {
-        configFile: 'test/client/config/karma.conf.js'
+        configFile: 'test/client/karma.conf.js'
       }
     },
     protractor: {
-      options: {
-        configFile: "test/client/config/protractor-conf.js"
+      e2e: {
+        configFile: "test/client/protractor.conf.js",
+        keepAlive: false
       }
     }
   });
 
-  //Load NPM tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-karma');
@@ -64,12 +76,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-env');
 
-  //Making grunt default to force in order not to break the project.
-  grunt.option('force', true);
-
-  //Default task(s).
   grunt.registerTask('default', ['concurrent']);
 
-  //Test task.
-  grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit', 'protractor']);
+  grunt.registerTask('test', ['env:test', 'mochaTest:server', 'karma:unit']);
 };

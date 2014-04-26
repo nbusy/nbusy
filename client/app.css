@@ -9,7 +9,7 @@
   margin-bottom: -10px;
 }
 
-.dropdown-toggle img {
+.navbar .dropdown-toggle img {
   width: 23px;
   height: 23px;
   margin-top: -3px;
@@ -67,9 +67,13 @@ body {
   display: block;
 }
 
-/* Widgets */
+/*----------------------------------------------------------------------
+ * KOAN sample app widgets
+ *---------------------------------------------------------------------*/
 
-.self-online-indicator {
+/* User online indicator */
+
+.online-indicator {
   background-color: lightgrey;
   height: 7px;
   width: 7px;
