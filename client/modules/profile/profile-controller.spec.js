@@ -8,7 +8,7 @@ describe('Profile controller', function () {
 
   var ctrl, scope;
 
-  beforeEach(module('koan.profile'));
+  beforeEach(module('nbusy.profile'));
 
   beforeEach(inject(function ($rootScope, $controller) {
     scope = $rootScope.$new();

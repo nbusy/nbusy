@@ -4,7 +4,7 @@
  * Home controller simply lists all the posts from everyone on the front page.
  */
 
-angular.module('koan.home').controller('HomeCtrl', function ($scope, api) {
+angular.module('nbusy.home').controller('HomeCtrl', function ($scope, api) {
 
   var user = $scope.common.user;
   $scope.postBox = {message: null, disabled: false};

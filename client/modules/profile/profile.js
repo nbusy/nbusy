@@ -5,9 +5,9 @@
  */
 
 angular
-    .module('koan.profile', [
+    .module('nbusy.profile', [
       'ngRoute',
-      'koan.common'
+      'nbusy.common'
     ])
     .config(function ($routeProvider) {
       $routeProvider

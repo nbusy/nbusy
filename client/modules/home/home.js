@@ -5,15 +5,15 @@
  */
 
 angular
-    .module('koan.home', [
+    .module('nbusy.home', [
       'ngRoute',
       'monospaced.elastic',
-      'koan.common'
+      'nbusy.common'
     ])
     .config(function ($routeProvider) {
       $routeProvider
           .when('/', {
-            title: 'KOAN',
+            title: 'NBusy',
             templateUrl: 'modules/home/home.html',
             controller: 'HomeCtrl'
           });

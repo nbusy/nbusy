@@ -1,15 +1,15 @@
 'use strict';
 
 /**
- * KOAN app level module. This is the root module for all others.
+ * Top level module. Lists all the other modules as dependencies.
  */
 
 angular
-    .module('koan', [
+    .module('nbusy', [
       'ngRoute',
-      'koan.common',
-      'koan.home',
-      'koan.profile'
+      'nbusy.common',
+      'nbusy.home',
+      'nbusy.profile'
     ])
 
     .config(function ($routeProvider, $locationProvider) {
