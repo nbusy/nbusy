@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Entry point for KOAN app. Initiates database connection and starts listening for requests on configured port.
+ * Entry point for NBusy. Initiates database connection and starts listening for requests on configured port.
  */
 
 var config = require('./server/config/config'),
@@ -27,7 +27,7 @@ app.init = co(function *() {
   app.server = app.listen(config.app.port);
   ws.listen(app.server);
   if (config.app.env !== 'test') {
-    console.log('KOAN listening on port ' + config.app.port);
+    console.log('NBusy listening on port ' + config.app.port);
   }
 });
 

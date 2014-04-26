@@ -1,7 +1,7 @@
 {
-  "name": "koan",
+  "name": "nbusy",
   "version": "1.0.0",
-  "description": "KOAN Stack (Koa, Angular, Node, Mongo, WebSockets) for real-time full-stack JavaScript web development.",
+  "description": "NBusy Web API.",
   "repository": {
     "type": "git",
     "url": "git://github.com/soygul/koan.git"

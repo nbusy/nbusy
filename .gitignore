@@ -16,7 +16,7 @@ results
 npm-debug.log
 node_modules/
 
-# KOAN
+# NBusy
 
 dist
 .tmp
@@ -33,4 +33,4 @@ logs/*
 # IntelliJ IDEA
 
 .idea/
-koan.iml
+nbusy.iml
