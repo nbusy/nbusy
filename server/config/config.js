@@ -11,7 +11,7 @@ var baseConfig = {
   app: {
     root: path.normalize(__dirname + '/../..'),
     env: process.env.NODE_ENV,
-    secret: 'secret key' /* used in signing the jwt tokens */
+    secret: process.env.SECRET /* used in signing the jwt tokens */
   },
   oauth: {
     facebook: {
@@ -26,7 +26,8 @@ var baseConfig = {
 var platformConfig = {
   development: {
     app: {
-      port: 3000
+      port: 3000,
+      secret: 'secret key'
     },
     mongo: {
       url: 'mongodb://localhost:27017/nbusy-dev'
@@ -45,7 +46,8 @@ var platformConfig = {
 
   test: {
     app: {
-      port: 3001
+      port: 3001,
+      secret: 'secret key'
     },
     mongo: {
       url: 'mongodb://localhost:27017/nbusy-test'

@@ -11,7 +11,7 @@ describe('Users controller', function () {
     request
         .post('/users')
         .set('Authorization', token)
-        .send({name: 'Test User', email: 'test@koanjs.com'})
+        .send({name: 'Test User', email: 'test@nbusy.com'})
         .expect(201, done);
   });
 });

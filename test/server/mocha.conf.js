@@ -9,7 +9,7 @@ var config = require('../../server/config/config'),
     request = supertest(baseUrl);
 
 // create a valid jwt token to be sent with every request
-var token = jwt.sign({id: 2, name: 'Chuck Norris', mail: 'chuck@koanjs.com'}, config.app.secret);
+var token = jwt.sign({id: 2, name: 'Chuck Norris', mail: 'chuck@nbusy.com'}, config.app.secret);
 token = 'Bearer ' + token;
 
 // make request and token objects available

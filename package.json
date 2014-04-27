@@ -4,7 +4,7 @@
   "description": "NBusy Web API.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/soygul/koan.git"
+    "url": "git://github.com/nbusy/nbusy.git"
   },
   "engines": {
     "node": ">=0.11.11"
