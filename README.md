@@ -1,4 +1,7 @@
-# [![NBusy](http://www.soygul.com/wp-content/uploads/2013/12/nbusy_logo_small.png)](http://nbusy.com/)
+# [![NBusy](https://raw.github.com/nbusy/nbusy/master/client/images/nbusy_large.png)](http://nbusy.com/)
+
+[![Build Status](https://travis-ci.org/nbusy/nbusy.svg?branch=master)](https://travis-ci.org/nbusy/nbusy)
+
 Social networking platform built with [Angular](http://angularjs.org/) and [Node.js](http://nodejs.org/).
 
 ## Tech Stack
