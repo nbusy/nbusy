@@ -88,7 +88,9 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="" ng-click="common.logout()">Logout</a></li>
+            <li><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="" ng-click="common.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -102,7 +104,6 @@
       <ul class="nav nav-pills nav-stacked sidenav">
         <li ng-class="common.active.home"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li ng-class="common.active.messages"><a href="/messages"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
-        <li ng-class="common.active.profile"><a href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
       </ul>
     </div>
 

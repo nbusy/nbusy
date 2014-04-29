@@ -79,4 +79,4 @@ var platformConfig = {
 };
 
 // override the base configuration with the platform specific values
-module.exports = _.merge(baseConfig, platformConfig[baseConfig.app.env || 'development']);
+module.exports = _.merge(baseConfig, platformConfig[baseConfig.app.env || (baseConfig.app.env = 'development')]);
