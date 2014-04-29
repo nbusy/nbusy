@@ -9,6 +9,7 @@ angular
       'ngRoute',
       'nbusy.common',
       'nbusy.home',
+      'nbusy.messages',
       'nbusy.profile'
     ])
 
