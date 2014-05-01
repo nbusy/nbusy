@@ -9,3 +9,14 @@ For technological and architectural overview, have a look at this [blog post](ht
 
 ## Project Template
 This project uses [KOAN](https://github.com/soygul/koan) (Koa, AngularJS, Node.js) Stack as the project template.
+
+## Heroku Deployment
+Apart from the usual KOAN Heroku deployment steps, following are also needed:
+
+```bash
+heroku config:add NODE_ENV=production
+heroku config:add SECRET=jwt_secret
+heroku config:add PASS=seed_pass
+heroku config:add FACEBOOK_SECRET=facebook_oauth_secret
+heroku config:add GOOGLE_SECRET=google_oauth_secret
+```
