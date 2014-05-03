@@ -28,6 +28,7 @@ comongo.connect = function *() {
   comongo.counters = yield db.collection('counters');
   comongo.users = yield db.collection('users');
   comongo.posts = yield db.collection('posts');
+  comongo.chats = yield db.collection('chats');
 };
 
 /**

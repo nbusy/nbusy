@@ -63,4 +63,9 @@ angular
           delete $rootScope.common.active[previousCtrl];
         }
       });
+
+      // retrieve chats list
+      api.chats.list().success(function (chats) {
+        $rootScope.common.chats = chats;
+      });
     });

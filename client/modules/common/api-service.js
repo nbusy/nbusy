@@ -68,6 +68,22 @@ angular.module('nbusy.common').factory('api', function ($rootScope, $http, $wind
     }
   };
 
+  api.chats = {
+    list: function () {
+      return $http({method: 'GET', url: apiBase + '/chats', headers: headers});
+    },
+    create: function (chat) {
+      return $http({method: 'POST', url: apiBase + '/chats', data: chat, headers: headers});
+    },
+    created: event(),
+    messages: {
+      create: function (chatId, message) {
+        return $http({method: 'POST', url: apiBase + '/chats/' + chatId + '/messages', data: message, headers: headers});
+      },
+      created: event()
+    }
+  };
+
   api.debug = {
     clearDatabase: function () {
       return $http({method: 'POST', url: apiBase + '/debug/clearDatabase', headers: headers});
