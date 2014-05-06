@@ -30,6 +30,7 @@ module.exports = function *(overwrite) {
     yield mongo.counters.insert({_id: 'userId', seq: users.length});
     yield mongo.users.insert(users);
     yield mongo.posts.insert(posts);
+    yield mongo.chats.insert(chats);
   }
 };
 
