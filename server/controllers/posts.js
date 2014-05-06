@@ -8,7 +8,7 @@ var route = require('koa-route'),
     parse = require('co-body'),
     mongo = require('../config/mongo'),
     ws = require('../config/ws'),
-    users = require('../util/users'),
+    cache = require('../util/cache'),
     ObjectID = mongo.ObjectID;
 
 // register koa routes
@@ -28,7 +28,10 @@ function *listPosts() {
       {limit: 15, sort: {_id: -1}} /* only get last 15 posts */).toArray();
 
   posts.forEach(function (post) {
-    post.from = users.resolve(post.from);
+    post.from = cache.getUser(post.from);
+    post.comments.forEach(function (comment) {
+      comment.from = cache.getUser(comment.from);
+    });
     post.id = post._id;
     delete post._id;
   });

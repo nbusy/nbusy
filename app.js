@@ -9,6 +9,7 @@ var config = require('./server/config/config'),
     mongoSeed = require('./server/config/mongo-seed'),
     koaConfig = require('./server/config/koa'),
     ws = require('./server/config/ws'),
+    cache = require('./server/util/cache'),
     co = require('co'),
     koa = require('koa'),
     app = koa();
@@ -19,6 +20,8 @@ app.init = co(function *() {
   // initialize mongodb and populate the database with seed data if empty
   yield mongo.connect();
   yield mongoSeed();
+
+  yield cache.init();
 
   // koa config
   koaConfig(app);
