@@ -29,9 +29,11 @@ function *listPosts() {
 
   posts.forEach(function (post) {
     post.from = cache.getUser(post.from);
-    post.comments.forEach(function (comment) {
-      comment.from = cache.getUser(comment.from);
-    });
+    if (post.comments) {
+      post.comments.forEach(function (comment) {
+        comment.from = cache.getUser(comment.from);
+      });
+    }
     post.id = post._id;
     delete post._id;
   });
