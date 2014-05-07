@@ -19,8 +19,8 @@ exports.init = function (app) {
 function *listChats() {
   var posts = yield mongo.chats.find(
       {},
-      {messages: {$slice: -15 /* only get last x many comments for each post */}},
-      {limit: 15, sort: {_id: -1}} /* only get last 15 posts */).toArray();
+      {messages: {$slice: -1 /* only get last message in a chat */}},
+      {limit: 15, sort: {updateTime: -1}} /* only get last 15 posts */).toArray();
 
   posts.forEach(function (post) {
     post.id = post._id;
