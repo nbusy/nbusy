@@ -47,7 +47,7 @@ function *listPosts() {
 function *createPost() {
   // it is best to validate post body with something like node-validator here, before saving it in the database..
   var post = yield parse(this);
-  post.from = this.user;
+  post.from = this.user.id;
   post.createdTime = new Date();
   var results = yield mongo.posts.insert(post);
 
@@ -55,6 +55,7 @@ function *createPost() {
   this.body = results[0]._id.toString(); // we need .toString() here to return text/plain response
 
   // now notify everyone about this new post
+  post.from = cache.getUser(post.from);
   post.id = post._id;
   delete post._id;
   ws.notify('posts.created', post);
