@@ -17,17 +17,18 @@ exports.init = function (app) {
  * Lists last 25 chats with the last message in each chat.
  */
 function *listChats() {
-  var posts = yield mongo.chats.find(
+  var chats = yield mongo.chats.find(
       {},
       {messages: {$slice: -1 /* only get last message in a chat */}},
       {limit: 15, sort: {updateTime: -1}} /* only get last 15 posts */).toArray();
 
-  posts.forEach(function (post) {
-    post.id = post._id;
-    delete post._id;
+  chats.forEach(function (chat) {
+    // title, image, last message, last updated
+    chat.id = chat._id;
+    delete chat._id;
   });
 
-  this.body = posts;
+  this.body = chats;
 }
 
 /**
