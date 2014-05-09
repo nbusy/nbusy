@@ -1,6 +1,6 @@
 'use strict';
 
-
+// DTOs
 var posts = {
   data: [
     {
@@ -103,3 +103,9 @@ var thread1 = {
     }
   }
 };
+
+var chats = [
+  {
+
+  }
+];
