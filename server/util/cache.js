@@ -12,6 +12,8 @@ exports.init = function *() {
   this.users.forEach(function (user) {
     user.picture =  'api/users/' + user._id + '/picture';
   });
+
+  this.users.unshift(null); // so that id's match array's key
 };
 
 exports.getUser = function (user) {

@@ -26,6 +26,8 @@ function *listChats() {
     // title, image, last message, last updated
     chat.id = chat._id;
     delete chat._id;
+
+
   });
 
   this.body = chats;
