@@ -106,6 +106,18 @@ var thread1 = {
 
 var chats = [
   {
-
+    data: [
+      {
+        id: chatDms[0]._id,
+        title: '',
+        updatedTime: getTime(-71),
+        picture: '',
+        lastMessage: ''
+      }
+    ],
+    paging: {
+      previous: '',
+      next: ''
+    }
   }
 ];

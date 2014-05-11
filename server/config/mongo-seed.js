@@ -95,7 +95,7 @@ var chats = [
   {
     _id: new ObjectID(),
     createdTime: getTime(-76),
-    updateTime: getTime(-71),
+    updatedTime: getTime(-71),
     participants: [1, 2],
     messageCount: 2,
     messages: [

@@ -2,6 +2,7 @@
 
 var route = require('koa-route'),
     parse = require('co-body'),
+    _ = require('lodash'),
     mongo = require('../config/mongo'),
     ws = require('../config/ws'),
     ObjectID = mongo.ObjectID;
@@ -18,7 +19,7 @@ exports.init = function (app) {
  */
 function *listChats() {
   var chats = yield mongo.chats.find(
-      {},
+      {updatedTime: 1, participants: 1, title: 1},
       {messages: {$slice: -1 /* only get last message in a chat */}},
       {limit: 15, sort: {updateTime: -1}} /* only get last 15 posts */).toArray();
 
@@ -26,8 +27,9 @@ function *listChats() {
     // title, image, last message, last updated
     chat.id = chat._id;
     delete chat._id;
-
-
+    chat.title = title || _.;
+    chat.image = '';
+    chat.lastMessage = '';
   });
 
   this.body = chats;
