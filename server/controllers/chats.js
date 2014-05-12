@@ -27,7 +27,7 @@ function *listChats() {
     // title, image, last message, last updated
     chat.id = chat._id;
     delete chat._id;
-    chat.title = title || _.;
+    chat.title = title || _(chat.participants).filter(function (participant) {participant !== this.user.id}).fist();
     chat.image = '';
     chat.lastMessage = '';
   });
