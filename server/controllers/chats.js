@@ -19,17 +19,24 @@ exports.init = function (app) {
  */
 function *listChats() {
   var chats = yield mongo.chats.find(
-      {updatedTime: 1, participants: 1, title: 1},
-      {messages: {$slice: -1 /* only get last message in a chat */}},
-      {limit: 15, sort: {updateTime: -1}} /* only get last 15 posts */).toArray();
+      {},
+      {updatedTime: 1, participants: 1, title: 1, messages: {$slice: -1 /* only get last message in a chat */}},
+      {limit: 15, sort: {updateTime: -1}} /* only get last 15 chats by last updated */)
+      .toArray();
 
   chats.forEach(function (chat) {
-    // title, image, last message, last updated
     chat.id = chat._id;
     delete chat._id;
-    chat.title = title || _(chat.participants).filter(function (participant) {participant !== this.user.id}).fist();
-    chat.image = '';
     chat.lastMessage = '';
+
+    if (!chat.title) { // then this is a one-to-one chat
+      var otherPerson = _(chat.participants).filter(function (participant) {
+        return participant !== this.user.id;
+      }).first();
+      otherPerson = cache.getUser(otherPerson);
+      chat.title = otherPerson.name;
+      chat.picture = otherPerson.picture;
+    }
   });
 
   this.body = chats;
