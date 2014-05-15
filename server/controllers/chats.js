@@ -5,6 +5,7 @@ var route = require('koa-route'),
     _ = require('lodash'),
     mongo = require('../config/mongo'),
     ws = require('../config/ws'),
+    cache = require('../util/cache'),
     ObjectID = mongo.ObjectID;
 
 // register koa routes
@@ -18,7 +19,8 @@ exports.init = function (app) {
  * Lists last 25 chats with the last message in each chat.
  */
 function *listChats() {
-  var chats = yield mongo.chats.find(
+  var user = this.user,
+      chats = yield mongo.chats.find(
       {},
       {updatedTime: 1, participants: 1, title: 1, messages: {$slice: -1 /* only get last message in a chat */}},
       {limit: 15, sort: {updateTime: -1}} /* only get last 15 chats by last updated */)
@@ -27,19 +29,25 @@ function *listChats() {
   chats.forEach(function (chat) {
     chat.id = chat._id;
     delete chat._id;
-    chat.lastMessage = '';
+    chat.lastMessage = chat.messages[0].message;
 
     if (!chat.title) { // then this is a one-to-one chat
-      var otherPerson = _(chat.participants).filter(function (participant) {
-        return participant !== this.user.id;
-      }).first();
+      var otherPerson = _.filter(chat.participants, function (participant) {
+        return participant !== user.id;
+      })[0];
       otherPerson = cache.getUser(otherPerson);
       chat.title = otherPerson.name;
       chat.picture = otherPerson.picture;
     }
   });
 
-  this.body = chats;
+  this.body = {
+    data: chats,
+    paging: {
+      previous: '',
+      next: ''
+    }
+  };
 }
 
 /**

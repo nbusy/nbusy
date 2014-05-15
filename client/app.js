@@ -66,6 +66,6 @@ angular
 
       // retrieve chats list
       api.chats.list().success(function (chats) {
-        $rootScope.common.chats = chats;
+        $rootScope.common.chats = chats.data;
       });
     });

@@ -111,13 +111,13 @@
 
     <div class="col-md-3">
       <ul class="media-list">
-        <li class="media" ng-repeat="chat in chats">
+        <li class="media" ng-repeat="chat in common.chats">
           <a class="pull-left" ng-href="/messages/{{chat.id}}">
             <img class="media-object" ng-src="{{chat.picture}}" alt="">
           </a>
           <div class="media-body">
             <h4 class="media-heading">{{chat.title}}</h4>
-            Last message in the conversation.
+            {{chat.lastMessage}}
           </div>
         </li>
       </ul>
