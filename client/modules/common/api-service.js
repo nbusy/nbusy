@@ -6,10 +6,11 @@
 
 angular.module('nbusy.common').factory('api', function ($rootScope, $http, $window) {
 
-  var apiBase = 'api' /* base /api uri */,
+  var hostUrl = $window.sessionStorage.hostUrl || $window.localStorage.hostUrl || $window.document.location.origin || ($window.location.protocol + '//' + $window.location.host),
+      apiBase = hostUrl + '/api' /* base /api uri */,
       token = ($window.sessionStorage.token || $window.localStorage.token),
       headers = {Authorization: 'Bearer ' + token},
-      wsHost = ($window.document.location.origin || ($window.location.protocol + '//' + $window.location.host)).replace(/^http/, 'ws'),
+      wsHost = hostUrl.replace(/^http/, 'ws'),
       api = {events: {}};
 
   // initiate the websocket connection to the host
