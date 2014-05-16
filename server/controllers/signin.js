@@ -41,7 +41,7 @@ function *signin() {
 
   // sign and send the token along with the user info
   var token = jwt.sign(user, config.app.secret, {expiresInMinutes: 90 * 24 * 60 /* 90 days */});
-  this.body = {token: token, user: user, hostUrl: config.env === 'production' ? 'https://nbusy.herokuapp.com' : undefined};
+  this.body = {token: token, user: user, hostUrl: config.app.env === 'production' ? 'https://nbusy.herokuapp.com' : undefined};
 }
 
 /**
