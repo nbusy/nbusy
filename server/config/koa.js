@@ -9,6 +9,18 @@ var fs = require('fs'),
 
 module.exports = function (app) {
   // middleware configuration
+  app.use(function *(next) {
+    this.set('Access-Control-Allow-Origin', '*');
+    this.set('Access-Control-Max-Age', config.app.cacheTime / 1000);
+    this.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, PUT, POST, DELETE');
+    this.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    this.set('Access-Control-Allow-Credentials', 'true');
+    if (this.method === 'OPTIONS') {
+      this.status = 204;
+    } else {
+      yield next;
+    }
+  });
   if (config.app.env !== 'test') {
     app.use(logger());
   }
