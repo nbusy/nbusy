@@ -38,6 +38,8 @@ function *listChats() {
       otherPerson = cache.getUser(otherPerson);
       chat.title = otherPerson.name;
       chat.picture = otherPerson.picture;
+    } else { // then this is a group chat
+      chat.picture = '/images/users.jpg';
     }
   });
 
