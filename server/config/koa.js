@@ -5,28 +5,23 @@ var fs = require('fs'),
     send = require('koa-send'),
     jwt = require('koa-jwt'),
     livereload = require('koa-livereload'),
+    cors = require('koa-cors'),
     config = require('./config');
 
 module.exports = function (app) {
   // middleware configuration
-  app.use(function *(next) {
-    this.set('Access-Control-Allow-Origin', '*');
-    this.set('Access-Control-Max-Age', config.app.cacheTime / 1000);
-    this.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, PUT, POST, DELETE');
-    this.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    this.set('Access-Control-Allow-Credentials', 'true');
-    if (this.method === 'OPTIONS') {
-      this.status = 204;
-    } else {
-      yield next;
-    }
-  });
   if (config.app.env !== 'test') {
     app.use(logger());
   }
   if (config.app.env === 'development') {
     app.use(livereload({excludes: ['/modules']}));
   }
+  app.use(cors({
+    maxAge: config.app.cacheTime / 1000,
+    credentials: true,
+    methods: 'GET, HEAD, OPTIONS, PUT, POST, DELETE',
+    headers: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  }));
 
   // register special controllers which should come before any jwt token check and be publicly accessible
   require('../controllers/public').init(app);
