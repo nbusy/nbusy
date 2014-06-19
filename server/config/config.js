@@ -68,11 +68,11 @@ var platformConfig = {
     oauth: {
       facebook: {
         clientId: '194890683879045',
-        callbackUrl: 'https://nbusy.com/signin/facebook/callback'
+        callbackUrl: 'http://nbusy.com/signin/facebook/callback'
       },
       google: {
         clientId: '218602439235-6g09g0ap6i8v25v3rel49rtqjcu9ppj0.apps.googleusercontent.com',
-        callbackUrl: 'https://nbusy.com/signin/google/callback'
+        callbackUrl: 'http://nbusy.com/signin/google/callback'
       }
     }
   }
