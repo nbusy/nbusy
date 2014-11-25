@@ -24,7 +24,7 @@ var baseConfig = {
   }
 };
 
-// environment config overrides
+// environment specific config overrides
 var platformConfig = {
   development: {
     app: {
