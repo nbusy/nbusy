@@ -12,7 +12,7 @@ var baseConfig = {
     root: path.normalize(__dirname + '/../..'),
     env: process.env.NODE_ENV,
     secret: process.env.SECRET /* used in signing the jwt tokens */,
-    pass: process.env.PASS /* generic password for seed user data */
+    pass: process.env.PASS /* generic password for seed user logins */
   },
   oauth: {
     facebook: {
