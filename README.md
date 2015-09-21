@@ -16,3 +16,7 @@ Apart from the usual KOAN Heroku deployment steps, following are also needed:
 ```bash
 heroku config:add SECRET=jwt_secret PASS=login_pass FACEBOOK_SECRET=facebook_oauth_secret GOOGLE_SECRET=google_oauth_secret
 ```
+
+## License
+
+[Apache License 2.0](LICENSE)
