@@ -12,7 +12,7 @@ const (
 )
 
 var (
-	run   = flag.Bool("run", false, "Start an NBusy server at address: "+addr)
+	run   = flag.Bool("run", false, "Start the NBusy server.")
 	caddr = flag.String("addr", addr, "Specifies a network address to start the server on. If not specific, default will be used: "+addr)
 )
 
