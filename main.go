@@ -13,7 +13,7 @@ const (
 
 var (
 	run   = flag.Bool("run", false, "Start the NBusy server.")
-	caddr = flag.String("addr", addr, "Specifies a network address to start the server on. If not specific, default will be used: "+addr)
+	caddr = flag.String("addr", addr, "Specifies a network address to start the server on. If not specific, default address will be used: "+addr)
 )
 
 func main() {
@@ -32,9 +32,14 @@ func startServer(addr string) {
 	if err != nil {
 		log.Fatalf("error creating server: %v", err)
 	}
-	defer s.Close()
+
+	defer func() {
+		if s.Close(); err != nil {
+			log.Printf("error closing server: %v", err)
+		}
+	}()
 
 	if err := s.ListenAndServe(); err != nil {
-		log.Fatalf("error closing server: %v", err)
+		log.Fatalf("error listening for connections: %v", err)
 	}
 }
