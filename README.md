@@ -1,21 +1,13 @@
 [![NBusy](https://raw.github.com/nbusy/nbusy/master/client/images/nbusy_large.png)](http://nbusy.com/)
 
 [![Build Status](https://travis-ci.org/nbusy/nbusy.svg?branch=master)](https://travis-ci.org/nbusy/nbusy)
+[![GoDoc](https://godoc.org/github.com/nbusy/nbusy?status.svg)](https://godoc.org/github.com/nbusy/nbusy)
 
-Social networking platform built with [Angular](http://angularjs.org/) and [Node.js](http://nodejs.org/).
+NBusy messaging server for web and mobile clients. Built on [Titan](https://github.com/titan-x) messaging server framework.
 
 ## Tech Stack
+
 For technological and architectural overview, have a look at this [blog post](http://www.soygul.com/projects/nbusy/).
-
-## Project Template
-This project uses [KOAN](https://github.com/soygul/koan) (Koa, AngularJS, Node.js) Stack as the project template.
-
-## Heroku Deployment
-Apart from the usual KOAN Heroku deployment steps, following are also needed:
-
-```bash
-heroku config:add SECRET=jwt_secret PASS=login_pass FACEBOOK_SECRET=facebook_oauth_secret GOOGLE_SECRET=google_oauth_secret
-```
 
 ## License
 
