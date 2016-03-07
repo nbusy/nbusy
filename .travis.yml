@@ -1,7 +1,7 @@
-language: node_js
-node_js:
-  - "0.11"
-env:
-  - NODE_ENV=test
-services:
-  - mongodb
+language: go
+env: GO_ENV=test
+go:
+  - 1.6
+script:
+  - go test -v ./...
+  - GORACE="halt_on_error=1" go test -v -race -cover ./...
