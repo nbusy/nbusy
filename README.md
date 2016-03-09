@@ -9,6 +9,14 @@ NBusy messaging server for web and mobile clients. Built on [Titan](https://gith
 
 For technological and architectural overview, have a look at this [blog post](http://www.soygul.com/projects/nbusy/).
 
+## Docker
+
+To create and run a Docker build:
+
+```bash
+docker build -t nbusy .
+```
+
 ## License
 
 [Apache License 2.0](LICENSE)
