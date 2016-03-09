@@ -32,7 +32,11 @@ docker stop nbusy
 
 ## Docker Registry
 
-Public NBusy Docker registry is accessible at:
+You can pull prebuilt NBusy Docker image via:
+
+```bash
+docker pull nbusy/nbusy
+```
 
 ## License
 
