@@ -11,10 +11,23 @@ For technological and architectural overview, have a look at this [blog post](ht
 
 ## Docker
 
-To create and run a Docker build:
+To build and run a Docker container:
 
 ```bash
 docker build -t nbusy .
+docker run --publish 3000:3000 --name nbusy --rm nbusy
+```
+
+The --publish flag tells docker to publish the container's port 8080 on the external port 6060.
+The --name flag gives our container a predictable name to make it easier to work with.
+The --rm flag tells docker to remove the container image when the outyet server exits.
+
+Now you can browse to the [WebSocket Test Page](http://www.websocket.org/echo.html) and type in `ws://192.168.99.100:3000` (you might need to replace the IP with the IP of you Docker host depending on your system).
+
+One you're done, shut down the running container from another terminal window:
+
+```bash
+docker stop nbusy
 ```
 
 ## License
