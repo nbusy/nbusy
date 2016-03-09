@@ -20,5 +20,5 @@ RUN go install -v ${nbusy_path}
 # Run the nbusy command by default when the container starts.
 ENTRYPOINT /go/bin/nbusy -run
 
-# Document that the service listens on port 3000.
-EXPOSE 3000
+# Document that the service listens on port 80.
+EXPOSE 80

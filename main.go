@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	addr = "127.0.0.1:3000"
+	addr = "0.0.0.0:80"
 )
 
 var (
