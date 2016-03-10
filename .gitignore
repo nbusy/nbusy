@@ -1,36 +1,26 @@
-# Node.js
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
 
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
+# Folders
+_obj
+_test
 
-pids
-logs
-results
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
 
-npm-debug.log
-node_modules/
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
 
-# NBusy
+_testmain.go
 
-dist
-.tmp
-.nodemon
-bower_components/
+*.exe
+*.test
+*.prof
+
 .DS_Store
-.nodemonignore
-.sass-cache/
-.bower-*/
-test/coverage/
-logs/*
-!.gitkeep
-
-# IntelliJ IDEA
-
-.idea/
-nbusy.iml
