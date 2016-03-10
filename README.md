@@ -7,7 +7,7 @@ NBusy messaging server for web and mobile clients. Built on [Titan](https://gith
 
 ## Tech Stack
 
-For technological and architectural overview, have a look at this [blog post](http://www.soygul.com/projects/nbusy/).
+For technological and architectural overview, have a look at this [blog post](http://soygul.com/nbusy).
 
 ## Docker
 
