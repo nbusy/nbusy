@@ -38,6 +38,8 @@ You can pull prebuilt NBusy Docker image via:
 docker pull nbusy/nbusy
 ```
 
+You can reference the repo by URL using docker.io/nbusy/nbusy
+
 ## License
 
 [Apache License 2.0](LICENSE)
