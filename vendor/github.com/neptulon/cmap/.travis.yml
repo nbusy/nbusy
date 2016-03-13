@@ -1,0 +1,8 @@
+language: go
+env: GO_ENV=test
+go:
+  - 1.5
+  - tip
+script:
+  - go test -v ./...
+  - GORACE="halt_on_error=1" go test -v -race -cover ./...

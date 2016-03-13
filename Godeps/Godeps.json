@@ -1,0 +1,51 @@
+{
+	"ImportPath": "github.com/nbusy/nbusy",
+	"GoVersion": "go1.6",
+	"Deps": [
+		{
+			"ImportPath": "github.com/dgrijalva/jwt-go",
+			"Comment": "v2.4.0-11-gf219341",
+			"Rev": "f2193411bd642f7db03249fd79d5292c9b34916a"
+		},
+		{
+			"ImportPath": "github.com/neptulon/cmap",
+			"Rev": "ca60eae9c83a8c6696b3f4af3e6bac4cc844d0b4"
+		},
+		{
+			"ImportPath": "github.com/neptulon/neptulon",
+			"Rev": "e51b284ae4f1500285bcf27d351b9c5616569021"
+		},
+		{
+			"ImportPath": "github.com/neptulon/neptulon/middleware",
+			"Rev": "e51b284ae4f1500285bcf27d351b9c5616569021"
+		},
+		{
+			"ImportPath": "github.com/neptulon/neptulon/middleware/jwt",
+			"Rev": "e51b284ae4f1500285bcf27d351b9c5616569021"
+		},
+		{
+			"ImportPath": "github.com/neptulon/shortid",
+			"Rev": "6ef2893210b0b9eafa063ed4c1868d478163ca73"
+		},
+		{
+			"ImportPath": "github.com/titan-x/gcm/ccs",
+			"Rev": "826b31a67c3d8b2f2514a5529a716f44b574ba3a"
+		},
+		{
+			"ImportPath": "github.com/titan-x/go-xmpp",
+			"Rev": "8b13d0ad771420685f85ed09d8e9bf81757e7e20"
+		},
+		{
+			"ImportPath": "github.com/titan-x/titan",
+			"Rev": "4b2f0bea6d771f5acabdc81776da23c88939d8c2"
+		},
+		{
+			"ImportPath": "github.com/titan-x/titan/client",
+			"Rev": "4b2f0bea6d771f5acabdc81776da23c88939d8c2"
+		},
+		{
+			"ImportPath": "golang.org/x/net/websocket",
+			"Rev": "0cb26f788dd4625d1956c6fd97ffc4c90669d129"
+		}
+	]
+}
