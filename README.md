@@ -1,4 +1,4 @@
-[![NBusy](https://raw.githubusercontent.com/nbusy/nbusy/nodejs/client/images/nbusy_large.png)](http://nbusy.com/)
+# NBusy Server
 
 [![Build Status](https://travis-ci.org/nbusy/nbusy.svg?branch=master)](https://travis-ci.org/nbusy/nbusy)
 [![GoDoc](https://godoc.org/github.com/nbusy/nbusy?status.svg)](https://godoc.org/github.com/nbusy/nbusy)
