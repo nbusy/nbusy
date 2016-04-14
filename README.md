@@ -9,7 +9,7 @@ NBusy messaging server for web and mobile clients. Built on [Titan](https://gith
 
 For technological and architectural overview, have a look at this [blog post](http://soygul.com/nbusy).
 
-## Docker
+## Docker Build and Deployment
 
 To build and run a Docker container:
 
@@ -39,6 +39,12 @@ docker pull nbusy/nbusy
 ```
 
 You can reference the repo by URL using docker.io/nbusy/nbusy
+
+## Heroku Deployment
+
+`Procfile`, `app.json`, and `/Godeps` are here to make this repo readily available for Heroku deployment.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## License
 
