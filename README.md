@@ -42,9 +42,9 @@ You can reference the repo by URL using docker.io/nbusy/nbusy
 
 ## Heroku Deployment
 
-`Procfile`, `app.json`, and `/Godeps` are here to make this repo readily available for Heroku deployment.
-
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+`Procfile`, `app.json`, and `/Godeps` are here to make this repo readily available for Heroku deployment. You can start by clicking the above button.
 
 ## License
 
