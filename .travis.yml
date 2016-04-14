@@ -10,6 +10,8 @@ script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...
   - docker build -t nbusy/nbusy .
+  - echo ${TRAVIS_PULL_REQUEST}
+  - echo ${TRAVIS_TAG}
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "${TRAVIS_TAG}" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push docker.io/nbusy/nbusy:latest;
@@ -17,3 +19,13 @@ script:
     docker tag nbusy/nbusy nbusy/nbusy:$v;
     docker push docker.io/nbusy/nbusy:$v;
     fi
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: InXlYdM0dt5rONzta3kUoc0E9T1L72Znw20V3IcnsCJ2e0cFcHqy/vF7CYJrVh2UEDFpiqDlJVZSjCdcFUrAHM7JeU6tvUqpbcM2vBGuO0Ow7MENrZxxeJXs5pMCmvuBmfxcoRyU1VZBfrGsXN3FvTQmns1IAPQtc5avbYTjOpM=
+  app: nbusy
+  skip_cleanup: true
+  on:
+    repo: nbusy/nbusy
+    tags: true
