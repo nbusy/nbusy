@@ -10,7 +10,7 @@ script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...
   - docker build -t nbusy/nbusy .
-  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -z "$TRAVIS_TAG" ]; then
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -n "$TRAVIS_TAG" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push docker.io/nbusy/nbusy:latest;
     v=$(echo ${TRAVIS_TAG} | cut -c 2-);
