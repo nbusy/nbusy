@@ -4,9 +4,11 @@ services:
   - docker
 env: GO_ENV=test
 go:
-  - 1.6
+  - 1.6.1
 before_install:
-  - docker build -t nbusy .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t nbusy/nbusy .
+  - docker push docker.io/nbusy/nbusy
 script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...
