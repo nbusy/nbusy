@@ -8,7 +8,7 @@ go:
 
 before_install:
   - docker build -t nbusy/nbusy .
-  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false"] && [ -z "${TRAVIS_TAG}" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push docker.io/nbusy/nbusy;
     fi
