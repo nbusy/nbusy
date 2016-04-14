@@ -1,7 +1,12 @@
+sudo: required
 language: go
+services:
+  - docker
 env: GO_ENV=test
 go:
   - 1.6
+before_install:
+  - docker build -t nbusy .
 script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...
