@@ -38,7 +38,9 @@ You can pull prebuilt NBusy Docker image via:
 docker pull nbusy/nbusy
 ```
 
-You can reference the repo by URL using docker.io/nbusy/nbusy
+You can find all the published tags at [Docker Hub: nbusy/nbusy](https://hub.docker.com/r/nbusy/nbusy/tags/)
+
+You can also reference the repo by URL using docker.io/nbusy/nbusy
 
 ## Heroku Deployment
 
