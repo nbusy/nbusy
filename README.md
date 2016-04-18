@@ -42,6 +42,16 @@ You can find all the published tags at [Docker Hub: nbusy/nbusy](https://hub.doc
 
 You can also reference the repo by URL using docker.io/nbusy/nbusy
 
+If something goes wrong and you want to stop all containers and delete all containers & images:
+
+```bash
+# stop then delete all containers
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+# delete all images
+docker rmi $(docker images -q)
+```
+
 ## Heroku Deployment
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
