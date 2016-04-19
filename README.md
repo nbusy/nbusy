@@ -47,9 +47,9 @@ If something goes wrong and you want to stop all containers and delete all conta
 ```bash
 # stop then delete all containers
 docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+docker rm -f $(docker ps -a -q)
 # delete all images
-docker rmi $(docker images -q)
+docker rmi -f $(docker images -q)
 ```
 
 ## Heroku Deployment
