@@ -58,7 +58,7 @@ docker rmi -f $(docker images -q)
 
 `Procfile` and `app.json` are ready making this repo readily available for Heroku deployment. You can start by clicking the above button.
 
-A sample deployment is at [wss://nbusy.herokuapp.com](wss://nbusy.herokuapp.com) where you can connect with any NBusy client.
+A sample deployment is at `wss://nbusy.herokuapp.com` where you can connect with any NBusy client.
 
 ## License
 
