@@ -5,6 +5,14 @@ import (
 	"github.com/neptulon/neptulon"
 )
 
+const (
+	// ACK is the short acknowledgement response for a request.
+	ACK = "ACK"
+
+	// NACK is the short rejection response for a request.
+	NACK = "NACK"
+)
+
 // Client is a Titan client.
 type Client struct {
 	ID      string     // Randomly generated unique client connection ID.

@@ -22,12 +22,12 @@ type Conn struct {
 	ID             string     // Randomly generated unique client connection ID.
 	Session        *cmap.CMap // Thread-safe data store for storing arbitrary data for this connection session.
 	middleware     []func(ctx *ReqCtx) error
-	resRoutes      *cmap.CMap // message ID (string) -> handler func(ctx *ResCtx) error : expected responses for requests that we've sent
-	ws             *websocket.Conn
-	wg             sync.WaitGroup
+	resRoutes      *cmap.CMap     // message ID (string) -> handler func(ctx *ResCtx) error : expected responses for requests that we've sent
+	ws             atomic.Value   // -> *websocket.Conn
+	wg             sync.WaitGroup // incremented by one per goroutine created by conn
 	deadline       time.Duration
 	isClientConn   bool
-	connected      atomic.Value
+	connected      atomic.Value // -> bool
 	disconnHandler func(c *Conn)
 }
 
@@ -38,13 +38,15 @@ func NewConn() (*Conn, error) {
 		return nil, err
 	}
 
-	return &Conn{
+	c := &Conn{
 		ID:             id,
 		Session:        cmap.New(),
 		resRoutes:      cmap.New(),
 		deadline:       time.Second * time.Duration(300),
 		disconnHandler: func(c *Conn) {},
-	}, nil
+	}
+	c.connected.Store(false)
+	return c, nil
 }
 
 // SetDeadline set the read/write deadlines for the connection, in seconds.
@@ -93,11 +95,12 @@ func (c *Conn) Connect(addr string) error {
 
 // RemoteAddr returns the remote network address.
 func (c *Conn) RemoteAddr() net.Addr {
-	if c.ws == nil {
+	ws := c.ws.Load().(*websocket.Conn)
+	if ws == nil {
 		return nil
 	}
 
-	return c.ws.RemoteAddr()
+	return ws.RemoteAddr()
 }
 
 // SendRequest sends a JSON-RPC request through the connection with an auto generated request ID.
@@ -126,15 +129,26 @@ func (c *Conn) SendRequestArr(method string, resHandler func(res *ResCtx) error,
 // Close closes the connection.
 func (c *Conn) Close() error {
 	c.connected.Store(false)
-	if c.ws != nil {
-		c.ws.Close()
+	ws := c.ws.Load().(*websocket.Conn)
+	if ws != nil {
+		ws.Close()
 	}
 	return nil
 }
 
 // Wait waits for all message/connection handler goroutines to exit.
-func (c *Conn) Wait() {
-	c.wg.Wait()
+// Returns error if wait timeouts (in seconds).
+func (c *Conn) Wait(timeout int) error {
+	done := make(chan bool)
+
+	go func() { c.wg.Wait(); done <- true }()
+
+	select {
+	case <-done:
+		return nil
+	case <-time.After(time.Second * time.Duration(timeout)):
+		return errors.New("wait timed out")
+	}
 }
 
 // SendResponse sends a JSON-RPC response message through the connection.
@@ -148,7 +162,7 @@ func (c *Conn) send(msg interface{}) error {
 		return errors.New("use of closed connection")
 	}
 
-	return websocket.JSON.Send(c.ws, msg)
+	return websocket.JSON.Send(c.ws.Load().(*websocket.Conn), msg)
 }
 
 // Receive receives message from the connection.
@@ -157,12 +171,12 @@ func (c *Conn) receive(msg *message) error {
 		return errors.New("use of closed connection")
 	}
 
-	return websocket.JSON.Receive(c.ws, &msg)
+	return websocket.JSON.Receive(c.ws.Load().(*websocket.Conn), &msg)
 }
 
 // Reuse an established websocket.Conn.
 func (c *Conn) setConn(ws *websocket.Conn) error {
-	c.ws = ws
+	c.ws.Store(ws)
 	c.connected.Store(true)
 	if err := ws.SetDeadline(time.Now().Add(c.deadline)); err != nil {
 		return fmt.Errorf("conn: error while setting websocket connection deadline: %v", err)
@@ -202,9 +216,16 @@ func (c *Conn) startReceive() {
 			c.wg.Add(1)
 			go func() {
 				defer recoverAndLog(c, &c.wg)
-				if err := newReqCtx(c, m.ID, m.Method, m.Params, c.middleware).Next(); err != nil {
-					log.Printf("conn: error while handling request: %v", err)
+				ctx := newReqCtx(c, m.ID, m.Method, m.Params, c.middleware)
+				if err := ctx.Next(); err != nil {
+					log.Printf("ctx: request middleware returned error: %v", err)
 					c.Close()
+				}
+				if ctx.Res != nil || ctx.Err != nil {
+					if err := ctx.Conn.sendResponse(ctx.ID, ctx.Res, ctx.Err); err != nil {
+						log.Printf("ctx: error sending response: %v", err)
+						c.Close()
+					}
 				}
 			}()
 
@@ -239,9 +260,10 @@ func (c *Conn) startReceive() {
 func recoverAndLog(c *Conn, wg *sync.WaitGroup) {
 	defer wg.Done()
 	if err := recover(); err != nil {
+		c.Close()
 		const size = 64 << 10
 		buf := make([]byte, size)
 		buf = buf[:runtime.Stack(buf, false)]
-		log.Printf("conn: panic handling response %v: %v\n%s", c.RemoteAddr(), err, buf)
+		log.Printf("conn: panic handling response %v: %v\nstack trace: %s", c.RemoteAddr(), err, buf)
 	}
 }

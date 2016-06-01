@@ -1,7 +1,7 @@
 language: go
 env: GO_ENV=test
 go:
-  - 1.6.1
+  - 1.6.2
 script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...

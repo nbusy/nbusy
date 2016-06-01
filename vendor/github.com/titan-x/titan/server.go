@@ -9,9 +9,9 @@ import (
 // Server wraps a listener instance and registers default connection and message handlers with the listener.
 type Server struct {
 	// neptulon framework components
-	server    *neptulon.Server
-	pubRoute  *middleware.Router
-	privRoute *middleware.Router
+	server     *neptulon.Server
+	pubRoutes  *middleware.Router
+	privRoutes *middleware.Router
 
 	// titan server components
 	db    DB
@@ -31,16 +31,16 @@ func NewServer(addr string) (*Server, error) {
 	}
 
 	s.server.MiddlewareFunc(middleware.Logger)
-	s.pubRoute = middleware.NewRouter()
-	s.server.Middleware(s.pubRoute)
-	initPubRoutes(s.pubRoute, s.db, Conf.App.JWTPass())
+	s.pubRoutes = middleware.NewRouter()
+	s.server.Middleware(s.pubRoutes)
+	initPubRoutes(s.pubRoutes, s.db, Conf.App.JWTPass())
 
 	//all communication below this point is authenticated
 	s.server.MiddlewareFunc(jwt.HMAC(Conf.App.JWTPass()))
 	s.server.Middleware(&s.queue)
-	s.privRoute = middleware.NewRouter()
-	s.server.Middleware(s.privRoute)
-	initPrivRoutes(s.privRoute, &s.queue)
+	s.privRoutes = middleware.NewRouter()
+	s.server.Middleware(s.privRoutes)
+	initPrivRoutes(s.privRoutes, &s.queue)
 	// r.Middleware(NotFoundHandler()) - 404-like handler
 
 	// todo: research a better way to handle inner-circular dependencies so remove these lines back into Server contructor

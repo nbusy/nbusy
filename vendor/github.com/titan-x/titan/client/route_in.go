@@ -1,6 +1,8 @@
 package client
 
 import (
+	"fmt"
+
 	"github.com/neptulon/neptulon"
 	"github.com/neptulon/neptulon/middleware"
 )
@@ -14,14 +16,14 @@ func (c *Client) InMsgHandler(handler func(m []Message) error) {
 	r.Request("msg.recv", func(ctx *neptulon.ReqCtx) error {
 		var msg []Message
 		if err := ctx.Params(&msg); err != nil {
-			return err
+			return fmt.Errorf("client: msg.recv: error reading request params: %v", err)
 		}
 
 		if err := handler(msg); err != nil {
 			return err
 		}
 
-		ctx.Res = "ACK"
+		ctx.Res = ACK
 		return ctx.Next()
 	})
 }

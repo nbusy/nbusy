@@ -14,6 +14,6 @@ func initGoogleAuthHandler(db DB, pass string) func(ctx *neptulon.ReqCtx) error 
 		if err := googleAuth(ctx, db, pass); err != nil {
 			return err
 		}
-		return ctx.Next()
+		return nil
 	}
 }

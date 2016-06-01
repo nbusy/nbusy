@@ -1,7 +1,7 @@
 {
 	"ImportPath": "github.com/nbusy/nbusy",
 	"GoVersion": "go1.6",
-	"GodepVersion": "v61",
+	"GodepVersion": "v72",
 	"Packages": [
 		"./..."
 	],
@@ -18,18 +18,18 @@
 		},
 		{
 			"ImportPath": "github.com/neptulon/neptulon",
-			"Comment": "v0.5-1-ga180c6d",
-			"Rev": "a180c6df4dd191fb5778eb92b4e5ec6d1be05a36"
+			"Comment": "v0.10",
+			"Rev": "f8cbd44377eb59d52033b4824b9bb3fcaae48c23"
 		},
 		{
 			"ImportPath": "github.com/neptulon/neptulon/middleware",
-			"Comment": "v0.5-1-ga180c6d",
-			"Rev": "a180c6df4dd191fb5778eb92b4e5ec6d1be05a36"
+			"Comment": "v0.10",
+			"Rev": "f8cbd44377eb59d52033b4824b9bb3fcaae48c23"
 		},
 		{
 			"ImportPath": "github.com/neptulon/neptulon/middleware/jwt",
-			"Comment": "v0.5-1-ga180c6d",
-			"Rev": "a180c6df4dd191fb5778eb92b4e5ec6d1be05a36"
+			"Comment": "v0.10",
+			"Rev": "f8cbd44377eb59d52033b4824b9bb3fcaae48c23"
 		},
 		{
 			"ImportPath": "github.com/neptulon/shortid",
@@ -46,17 +46,17 @@
 		},
 		{
 			"ImportPath": "github.com/titan-x/titan",
-			"Comment": "v0.4-2-gb187894",
-			"Rev": "b187894b5ee429fb5503afe6c928701428ffc4de"
+			"Comment": "v0.6-3-g2de76ed",
+			"Rev": "2de76ed2579549cddbaa978d62463e09fba3bae8"
 		},
 		{
 			"ImportPath": "github.com/titan-x/titan/client",
-			"Comment": "v0.4-2-gb187894",
-			"Rev": "b187894b5ee429fb5503afe6c928701428ffc4de"
+			"Comment": "v0.6-3-g2de76ed",
+			"Rev": "2de76ed2579549cddbaa978d62463e09fba3bae8"
 		},
 		{
 			"ImportPath": "golang.org/x/net/websocket",
-			"Rev": "fb93926129b8ec0056f2f458b1f519654814edf0"
+			"Rev": "b797637b7aeeed133049c7281bfa31dcc9ca42d6"
 		}
 	]
 }

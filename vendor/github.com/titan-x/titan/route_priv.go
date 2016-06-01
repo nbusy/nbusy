@@ -19,7 +19,7 @@ func initPrivRoutes(r *middleware.Router, q *Queue) {
 func initJWTAuthHandler(q *Queue) func(ctx *neptulon.ReqCtx) error {
 	return func(ctx *neptulon.ReqCtx) error {
 		q.SetConn(ctx.Conn.Session.Get("userid").(string), ctx.Conn.ID)
-		ctx.Res = "ACK" // todo: this could rather send the remaining queue size for the client
+		ctx.Res = client.ACK // todo: this could rather send the remaining queue size for the client
 		return ctx.Next()
 	}
 }
@@ -38,7 +38,7 @@ func initSendMsgHandler(q *Queue) func(ctx *neptulon.ReqCtx) error {
 			err := q.AddRequest(sMsg.To, "msg.recv", rMsgs, func(ctx *neptulon.ResCtx) error {
 				var res string
 				ctx.Result(&res)
-				if res == "ACK" {
+				if res == client.ACK {
 					// todo: send 'delivered' message to sender (as a request?) about this message (or failed, depending on output)
 					// todo: q.AddRequest(uid, "msg.delivered", ... // requeue if failed or handle resends automatically in the queue type, which is prefered)
 				} else {
@@ -52,7 +52,7 @@ func initSendMsgHandler(q *Queue) func(ctx *neptulon.ReqCtx) error {
 			}
 		}
 
-		ctx.Res = "ACK"
+		ctx.Res = client.ACK
 		return ctx.Next()
 	}
 }

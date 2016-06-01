@@ -163,7 +163,7 @@ func (s *Server) Close() error {
 // Wait waits for all message/connection handler goroutines in all connections to exit.
 func (s *Server) Wait() {
 	s.conns.Range(func(c interface{}) {
-		c.(*Conn).Wait()
+		c.(*Conn).Wait(180)
 	})
 }
 

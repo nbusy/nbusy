@@ -2,6 +2,7 @@ package neptulon
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 
 	"github.com/neptulon/cmap"
@@ -36,10 +37,12 @@ func newReqCtx(conn *Conn, id, method string, params json.RawMessage, mw []func(
 // Params reads request parameters into given object.
 // Object should be passed by reference.
 func (ctx *ReqCtx) Params(v interface{}) error {
-	if ctx.params != nil {
-		if err := json.Unmarshal(ctx.params, v); err != nil {
-			return fmt.Errorf("ctx: cannot deserialize request params: %v", err)
-		}
+	if ctx.params == nil {
+		return errors.New("ctx: request did not have any request parameters")
+	}
+
+	if err := json.Unmarshal(ctx.params, v); err != nil {
+		return fmt.Errorf("ctx: cannot deserialize request params: %v", err)
 	}
 
 	return nil
@@ -54,41 +57,69 @@ func (ctx *ReqCtx) Next() error {
 		return ctx.mw[ctx.mwIndex-1](ctx)
 	}
 
-	// send the response, if any
-	if ctx.Res != nil || ctx.Err != nil {
-		return ctx.Conn.sendResponse(ctx.ID, ctx.Res, ctx.Err)
-	}
-
-	return fmt.Errorf("ctx: no response provided for incoming request: %v: %v", ctx.Method, ctx.ID)
+	return nil
 }
 
 // ResCtx is the response context.
 type ResCtx struct {
 	Conn *Conn // Client connection.
 
-	ID string // Message ID.
+	ID           string // Message ID.
+	Success      bool   // If response is a success or error response.
+	ErrorCode    int    // Error code (if any).
+	ErrorMessage string // Error message (if any).
 
-	result json.RawMessage // result parameters
-	err    *resError       // response error (if any)
+	result    json.RawMessage // result parameters
+	errorData json.RawMessage // error data (if any)
 }
 
 func newResCtx(conn *Conn, id string, result json.RawMessage, err *resError) *ResCtx {
-	return &ResCtx{
+	r := ResCtx{
 		Conn:   conn,
 		ID:     id,
 		result: result,
-		err:    err,
 	}
+
+	if err == nil {
+		r.Success = true
+		return &r
+	}
+
+	r.Success = false
+	r.ErrorCode = err.Code
+	r.ErrorMessage = err.Message
+	r.errorData = err.Data
+	return &r
 }
 
 // Result reads response result data into given object.
 // Object should be passed by reference.
 func (ctx *ResCtx) Result(v interface{}) error {
-	if ctx.result != nil {
-		if err := json.Unmarshal(ctx.result, v); err != nil {
-			return fmt.Errorf("ctx: cannot deserialize response result: %v", err)
-		}
+	if !ctx.Success {
+		return errors.New("ctx: cannot read result data since server returned an error")
+	}
+	if ctx.result == nil {
+		return errors.New("ctx: server did not return any response data")
 	}
 
+	if err := json.Unmarshal(ctx.result, v); err != nil {
+		return fmt.Errorf("ctx: cannot deserialize response result: %v", err)
+	}
+	return nil
+}
+
+// ErrorData reads the error response data into given object.
+// Object should be passed by reference.
+func (ctx *ResCtx) ErrorData(v interface{}) error {
+	if ctx.Success {
+		return errors.New("ctx: cannot read error data since server returned a success response")
+	}
+	if ctx.errorData == nil {
+		return errors.New("ctx: server did not return any error data")
+	}
+
+	if err := json.Unmarshal(ctx.errorData, v); err != nil {
+		return fmt.Errorf("ctx: cannot deserialize error data: %v", err)
+	}
 	return nil
 }

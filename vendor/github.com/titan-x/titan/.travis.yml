@@ -1,7 +1,32 @@
+sudo: required
+
 language: go
-env: GO_ENV=test
 go:
-  - 1.6
+  - 1.6.2
+
+services:
+  - docker
+
+env: GO_ENV=test
+
 script:
   - go test -v ./...
   - GORACE="halt_on_error=1" go test -v -race -cover ./...
+  - docker build -t titanx/titan .
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ -n "$TRAVIS_TAG" ]; then
+    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push docker.io/titanx/titan:latest;
+    v=$(echo ${TRAVIS_TAG} | cut -c 2-);
+    docker tag titanx/titan titanx/titan:$v;
+    docker push docker.io/titanx/titan:$v;
+    fi
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: InXlYdM0dt5rONzta3kUoc0E9T1L72Znw20V3IcnsCJ2e0cFcHqy/vF7CYJrVh2UEDFpiqDlJVZSjCdcFUrAHM7JeU6tvUqpbcM2vBGuO0Ow7MENrZxxeJXs5pMCmvuBmfxcoRyU1VZBfrGsXN3FvTQmns1IAPQtc5avbYTjOpM=
+  app: titan-x
+  skip_cleanup: true
+  on:
+    repo: titan-x/titan
+    tags: true

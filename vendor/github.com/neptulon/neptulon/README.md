@@ -7,18 +7,13 @@ Neptulon is a bidirectional RPC framework with middleware support. Communication
 
 Neptulon framework is only about 400 lines of code, which makes it easy to fork, specialize, and maintain for specific purposes, if you need to.
 
-## Example
+## Getting Started
 
-Following is server for echoing all incoming messages.
+Following is a server for echoing all incoming messages as is:
 
 ```go
 s := neptulon.NewServer("127.0.0.1:3000")
-
-s.Middleware(func(ctx *neptulon.ReqCtx) error {
-	ctx.Params(&ctx.Res)
-	return ctx.Next()
-})
-
+s.MiddlewareFunc(middleware.Echo)
 s.ListenAndServe()
 ```
 
@@ -29,9 +24,9 @@ c, _ := neptulon.NewConn()
 c.Connect("ws://127.0.0.1:3000")
 c.SendRequest("echo", map[string]string{"message": "Hello!"}, func(ctx *neptulon.ResCtx) error {
 	var msg interface{}
-	ctx.Result(&msg)
+	err := ctx.Result(&msg)
 	fmt.Println("Server sent:", msg)
-	return nil
+	return err
 })
 ```
 
