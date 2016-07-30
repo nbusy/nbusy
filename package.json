@@ -1,0 +1,30 @@
+{
+  "name": "nbusy",
+  "description": "NBusy messaging server.",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "scripts": {
+    "start": "app.js",
+    "test": "npm run lint && npm run test-server && npm run test-client",
+    "lint": "./node_modules/.bin/eslint . --ignore-pattern dist/",
+    "test-server": ":",
+    "test-client": ":"
+  },
+  "dependencies": {
+    "aws-sdk": "2.4.11",
+    "babel-preset-es2016": "6.11.3",
+    "babel-register": "6.11.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nbusy/nbusy.git"
+  },
+  "license": "Apache-2.0",
+  "babel": {
+    "presets": [
+      "es2016",
+      "stage-0"
+    ]
+  }
+}
