@@ -6,13 +6,13 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "npm run lint && npm run test-server && npm run test-client",
+    "test": "npm run lint && cls",
     "lint": "./node_modules/.bin/eslint . --ignore-pattern dist/",
-    "test-server": ":",
-    "test-client": ":"
+    "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
   },
   "dependencies": {
     "aws-sdk": "2.4.11",
+    "babel-cli": "6.11.4",
     "babel-preset-es2016": "6.11.3",
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "6.11.6"
