@@ -17,7 +17,12 @@
     "bluebird": "3.4.1"
   },
   "devDependencies": {
-    "babel-cli": "6.11.4"
+    "babel-cli": "6.11.4",
+    "babel-eslint": "6.1.2",
+    "eslint": "3.2.0",
+    "eslint-config-airbnb-base": "5.0.1",
+    "eslint-plugin-babel": "3.3.0",
+    "eslint-plugin-import": "1.12.0"
   },
   "repository": {
     "type": "git",
@@ -25,7 +30,43 @@
   },
   "license": "Apache-2.0",
   "eslintConfig": {
-    "extends": "airbnb-base"
+    "extends": "airbnb-base",
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "mocha": true
+    },
+    "plugins": [
+      "babel"
+    ],
+    "rules": {
+      "max-len": [
+        2,
+        120,
+        2
+      ],
+      "generator-star-spacing": 0,
+      "babel/generator-star-spacing": 2,
+      "new-cap": 0,
+      "babel/new-cap": [
+        2,
+        {
+          "capIsNewExceptions": [
+            "express.Router"
+          ]
+        }
+      ],
+      "array-bracket-spacing": 0,
+      "babel/array-bracket-spacing": 2,
+      "object-curly-spacing": 0,
+      "babel/object-curly-spacing": 2,
+      "object-shorthand": 0,
+      "babel/object-shorthand": 2,
+      "arrow-parens": 0,
+      "babel/arrow-parens": 2,
+      "no-await-in-loop": 0,
+      "babel/no-await-in-loop": 2
+    }
   },
   "babel": {
     "presets": [
