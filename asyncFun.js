@@ -1,5 +1,7 @@
 async function asyncFun() {
-    return await Promise.resolve(1);
+    const res = await Promise.resolve(1);
+    console.log('inside await: ', res);
+    return res;
 }
 
 exports.asyncResult = asyncFun();
