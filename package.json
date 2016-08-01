@@ -6,22 +6,27 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "npm run lint && cls",
+    "test": "echo test done...",
     "lint": "./node_modules/.bin/eslint . --ignore-pattern dist/",
     "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
   },
   "dependencies": {
     "aws-sdk": "2.4.11",
-    "babel-cli": "6.11.4",
     "babel-preset-es2016": "6.11.3",
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "6.11.6"
+  },
+  "devDependencies": {
+    "babel-cli": "6.11.4"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/nbusy/nbusy.git"
   },
   "license": "Apache-2.0",
+  "eslintConfig": {
+    "extends": "airbnb-base"
+  },
   "babel": {
     "presets": [
       "es2016",
