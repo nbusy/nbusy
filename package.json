@@ -24,7 +24,8 @@
     "eslint": "3.2.0",
     "eslint-config-airbnb-base": "5.0.1",
     "eslint-plugin-babel": "3.3.0",
-    "eslint-plugin-import": "1.12.0"
+    "eslint-plugin-import": "1.12.0",
+    "jsonwebtoken": "^7.1.7"
   },
   "repository": {
     "type": "git",
