@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "echo test done...",
+    "test": "jest",
     "lint": "./node_modules/.bin/eslint . --ignore-pattern dist/",
     "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
   },
@@ -21,10 +21,12 @@
   "devDependencies": {
     "babel-cli": "6.11.4",
     "babel-eslint": "6.1.2",
+    "babel-jest": "14.1.0",
     "eslint": "3.2.0",
     "eslint-config-airbnb-base": "5.0.1",
     "eslint-plugin-babel": "3.3.0",
     "eslint-plugin-import": "1.12.0",
+    "jest-cli": "14.1.0",
     "jsonwebtoken": "^7.1.7"
   },
   "repository": {
@@ -37,7 +39,7 @@
     "parser": "babel-eslint",
     "env": {
       "node": true,
-      "mocha": true
+      "jest": true
     },
     "plugins": [
       "babel"
