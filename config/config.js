@@ -2,8 +2,8 @@
  * Environment variables and application configuration.
  */
 
-var path = require('path'),
-  _ = require('lodash');
+const path = require('path'),
+  _ = require('lodash'); // todo: we need to do this without lodash
 
 var baseConfig = {
   app: {

@@ -2,9 +2,9 @@
  * MongoDB module with named collections.
  */
 
-const mongodb = require('mongodb'),
-  MongoClient = mongodb.MongoClient,
-  config = require('./config');
+const mongodb = require('mongodb');
+
+const MongoClient = mongodb.MongoClient;
 
 // extending and exposing top mongodb namespace like this is not optimal but it saves the user from one extra require();
 module.exports = mongodb;
@@ -12,18 +12,18 @@ module.exports = mongodb;
 /**
  * Opens a new connection to the mongo database, closing the existing one if exists.
  */
-mongodb.connect = async function () {
+mongodb.connect = async function (url) {
   if (mongodb.db) {
-    console.log(await mongodb.db.close());
+    console.log('closing existing mongodb connection:', await mongodb.db.close());
   }
 
   // export mongo db instance
-  const db = mongodb.db = await MongoClient.connect(config.mongo.url);
+  const db = mongodb.db = await MongoClient.connect(url);
 
   // export default collections
   mongodb.counters = db.collection('counters');
   mongodb.users = db.collection('users');
-  mongodb.posts = db.collection('messages');
+  mongodb.messages = db.collection('messages');
 };
 
 /**

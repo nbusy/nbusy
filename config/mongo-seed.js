@@ -1,34 +1,7 @@
-const mongo = require('./mongo'),
-  config = require('./config'),
-  ObjectID = mongo.ObjectID;
+const mongo = require('./mongo');
+const config = require('./config');
 
-/**
- * Populates the database with seed data.
- * @param overwrite Overwrite existing database even if it is not empty.
- */
-function *seed(overwrite) {
-  var count = yield mongo.users.count({}, {limit: 1});
-  if (overwrite || count === 0) {
-    // first remove any leftover data in collections
-    var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */;
-    for (var collection in mongo) {
-      if (mongo[collection].drop) {
-        try {
-          yield mongo[collection].drop();
-        } catch (err) {
-          if (err.message !== collerrmsg) {
-            throw err;
-          }
-        }
-      }
-    }
-
-    // now populate collections with fresh data
-    yield mongo.counters.insert({_id: 'userId', seq: users.length});
-    yield mongo.users.insert(users);
-    yield mongo.posts.insert(posts);
-  }
-}
+const ObjectID = mongo.ObjectID;
 
 // declare seed data
 const users = [
@@ -46,7 +19,6 @@ const users = [
 
   },
 ];
-
 
 var now = new Date();
 function getTime(h) {
@@ -76,6 +48,34 @@ var posts = [
     ]
   }
 ];
+
+/**
+ * Populates the database with seed data.
+ * @param overwrite Overwrite existing database even if it is not empty.
+ */
+function *seed(overwrite) {
+  var count = yield mongo.users.count({}, {limit: 1});
+  if (overwrite || count === 0) {
+    // first remove any leftover data in collections
+    var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */;
+    for (var collection in mongo) {
+      if (mongo[collection].drop) {
+        try {
+          yield mongo[collection].drop();
+        } catch (err) {
+          if (err.message !== collerrmsg) {
+            throw err;
+          }
+        }
+      }
+    }
+
+    // now populate collections with fresh data
+    yield mongo.counters.insert({_id: 'userId', seq: users.length});
+    yield mongo.users.insert(users);
+    yield mongo.posts.insert(posts);
+  }
+}
 
 // export seed data and seed function
 seed.users = users;

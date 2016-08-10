@@ -4,8 +4,22 @@
 
 // jest.enableAutomock();
 
-describe('sum', () => {
-  it('adds 1 + 2 to equal 3', () => {
+const mongo = require('../config/mongo');
 
+describe('mongo', () => {
+  describe('connect()', () => {
+    it('should connect', async () => {
+      await mongo.connect('mongodb://localhost:27017/koan-test');
+    });
+
+    it('should disconnect existing connection', async () => {
+
+    });
+  });
+
+  describe('getNextSequence()', () => {
+    it('should increment and get counter', async () => {
+
+    });
   });
 });
