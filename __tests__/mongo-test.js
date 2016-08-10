@@ -5,8 +5,13 @@
 // jest.enableAutomock();
 
 const mongo = require('../config/mongo');
+const mongoSeed = require('../config/mongo-seed');
 
 describe('mongo', () => {
+  beforeEach(() => {
+    mongoSeed.seed(true);
+  });
+
   describe('connect()', () => {
     it('should connect', async () => {
       await mongo.connect('mongodb://localhost:27017/koan-test');

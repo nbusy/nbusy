@@ -1,26 +1,30 @@
+/**
+ * Seed data for mongo database.
+ */
+
 const mongo = require('./mongo');
 const config = require('./config');
 
 const ObjectID = mongo.ObjectID;
 
-// declare seed data
+// declare the seed data
 const users = [
   {
     _id: 1,
-    email: 'morgan@koan.herokuapp.com',
+    email: 'morgan@nbusy.herokuapp.com',
     password: config.app.pass,
     name: 'Morgan the Almighty',
   },
   {
     _id: 2,
-    email: 'chuck@koan.herokuapp.com',
+    email: 'chuck@nbusy.herokuapp.com',
     password: config.app.pass,
     name: 'Chuck Norris',
 
   },
 ];
 
-var now = new Date();
+const now = new Date();
 function getTime(h) {
   return new Date(new Date(now).setHours(now.getHours() + h));
 }

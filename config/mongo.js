@@ -31,7 +31,7 @@ mongodb.connect = async function (url) {
  * Useful for generating sequential integer IDs for certain collections (i.e. user collection).
  */
 mongodb.getNextSequence = async function (counterName) {
-  const results = await mongodb.counters.findAndModify(
+  const results = await mongodb.counters.findAndModify( // todo: rewrite using async: http://mongodb.github.io/node-mongodb-native/2.2/reference/ecmascript6/crud/
     {_id: counterName},
     [],
     {$inc: {seq: 1}},
