@@ -16,7 +16,7 @@
     "babel-register": "6.11.6",
     "bluebird": "3.4.1",
     "googleapis": "12.0.0",
-    "mongodb": "2.2.5"
+    "mongodb": "2.2.6"
   },
   "devDependencies": {
     "babel-cli": "6.11.4",
