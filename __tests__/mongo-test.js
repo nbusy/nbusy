@@ -4,27 +4,27 @@
 
 // jest.enableAutomock();
 
-const mongo = require('../config/mongo');
-const mongoSeed = require('../config/mongo-seed');
+const mongo = require('../config/mongo')
+const mongoSeed = require('../config/mongo-seed')
 
 describe('mongo', () => {
   beforeEach(() => {
-    mongoSeed.seed(true);
-  });
+    mongoSeed.seed(true)
+  })
 
   describe('connect()', () => {
     it('should connect', async () => {
-      await mongo.connect('mongodb://localhost:27017/koan-test');
-    });
+      await mongo.connect('mongodb://localhost:27017/koan-test')
+    })
 
     it('should disconnect existing connection', async () => {
 
-    });
-  });
+    })
+  })
 
   describe('getNextSequence()', () => {
     it('should increment and get counter', async () => {
 
-    });
-  });
-});
+    })
+  })
+})

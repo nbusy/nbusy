@@ -3,7 +3,7 @@
  */
 
 const path = require('path'),
-  _ = require('lodash'); // todo: we need to do this without lodash
+  _ = require('lodash') // todo: we need to do this without lodash
 
 var baseConfig = {
   app: {
@@ -12,7 +12,7 @@ var baseConfig = {
     secret: process.env.SECRET || 'secret key' /* used in signing the jwt tokens */,
     pass: process.env.PASS || 'pass' /* generic password for seed user logins */
   }
-};
+}
 
 // environment specific config overrides
 var platformConfig = {
@@ -67,7 +67,7 @@ var platformConfig = {
       }
     }
   }
-};
+}
 
 // override the base configuration with the platform specific values
-module.exports = _.merge(baseConfig, platformConfig[baseConfig.app.env || (baseConfig.app.env = 'development')]);
+module.exports = _.merge(baseConfig, platformConfig[baseConfig.app.env || (baseConfig.app.env = 'development')])

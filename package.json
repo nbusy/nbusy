@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint . --ignore-pattern dist/",
+    "lint": "./node_modules/.bin/standard --fix --ignore-pattern dist/",
     "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
   },
   "dependencies": {
@@ -22,56 +22,20 @@
     "babel-cli": "6.11.4",
     "babel-eslint": "6.1.2",
     "babel-jest": "14.1.0",
-    "eslint": "3.2.0",
-    "eslint-config-airbnb-base": "5.0.1",
-    "eslint-plugin-babel": "3.3.0",
-    "eslint-plugin-import": "1.12.0",
     "jest-cli": "14.1.0",
-    "jsonwebtoken": "^7.1.7"
+    "jsonwebtoken": "7.1.7",
+    "standard": "7.1.2"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/nbusy/nbusy.git"
   },
   "license": "Apache-2.0",
-  "eslintConfig": {
-    "extends": "airbnb-base",
+  "standard": {
     "parser": "babel-eslint",
     "env": {
       "node": true,
       "jest": true
-    },
-    "plugins": [
-      "babel"
-    ],
-    "rules": {
-      "no-console": 0,
-      "max-len": [
-        2,
-        120,
-        2
-      ],
-      "generator-star-spacing": 0,
-      "babel/generator-star-spacing": 2,
-      "new-cap": 0,
-      "babel/new-cap": [
-        2,
-        {
-          "capIsNewExceptions": [
-            "express.Router"
-          ]
-        }
-      ],
-      "array-bracket-spacing": 0,
-      "babel/array-bracket-spacing": 2,
-      "object-curly-spacing": 0,
-      "babel/object-curly-spacing": 2,
-      "object-shorthand": 0,
-      "babel/object-shorthand": 2,
-      "arrow-parens": 0,
-      "babel/arrow-parens": 2,
-      "no-await-in-loop": 0,
-      "babel/no-await-in-loop": 2
     }
   },
   "babel": {

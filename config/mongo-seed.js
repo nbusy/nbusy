@@ -2,10 +2,10 @@
  * Seed data for mongo database.
  */
 
-const mongo = require('./mongo');
-const config = require('./config');
+const mongo = require('./mongo')
+const config = require('./config')
 
-const ObjectID = mongo.ObjectID;
+const ObjectID = mongo.ObjectID
 
 // declare the seed data
 const users = [
@@ -13,20 +13,20 @@ const users = [
     _id: 1,
     email: 'morgan@nbusy.herokuapp.com',
     password: config.app.pass,
-    name: 'Morgan the Almighty',
+    name: 'Morgan the Almighty'
   },
   {
     _id: 2,
     email: 'chuck@nbusy.herokuapp.com',
     password: config.app.pass,
-    name: 'Chuck Norris',
+    name: 'Chuck Norris'
 
-  },
-];
+  }
+]
 
-const now = new Date();
-function getTime(h) {
-  return new Date(new Date(now).setHours(now.getHours() + h));
+const now = new Date()
+function getTime (h) {
+  return new Date(new Date(now).setHours(now.getHours() + h))
 }
 
 var posts = [
@@ -51,37 +51,37 @@ var posts = [
       }
     ]
   }
-];
+]
 
 /**
  * Populates the database with seed data.
  * @param overwrite Overwrite existing database even if it is not empty.
  */
-function *seed(overwrite) {
-  var count = yield mongo.users.count({}, {limit: 1});
+function * seed (overwrite) {
+  var count = yield mongo.users.count({}, {limit: 1})
   if (overwrite || count === 0) {
     // first remove any leftover data in collections
-    var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */;
+    var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */
     for (var collection in mongo) {
       if (mongo[collection].drop) {
         try {
-          yield mongo[collection].drop();
+          yield mongo[collection].drop()
         } catch (err) {
           if (err.message !== collerrmsg) {
-            throw err;
+            throw err
           }
         }
       }
     }
 
     // now populate collections with fresh data
-    yield mongo.counters.insert({_id: 'userId', seq: users.length});
-    yield mongo.users.insert(users);
-    yield mongo.posts.insert(posts);
+    yield mongo.counters.insert({_id: 'userId', seq: users.length})
+    yield mongo.users.insert(users)
+    yield mongo.posts.insert(posts)
   }
 }
 
 // export seed data and seed function
-seed.users = users;
-seed.posts = posts;
-module.exports = seed;
+seed.users = users
+seed.posts = posts
+module.exports = seed

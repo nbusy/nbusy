@@ -1,7 +1,7 @@
-require('babel-register');
-const promisifyAll = require('bluebird').promisifyAll;
-const asyncFun = require('./asyncFun');
+require('babel-register')
+const promisifyAll = require('bluebird').promisifyAll
+const asyncFun = require('./asyncFun')
 
-console.log('top level: ', asyncFun.asyncResult);
+console.log('top level: ', asyncFun.asyncResult)
 
-require('./aws/dynamodb').printTableNames();
+require('./aws/dynamodb').printTableNames()
