@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "jest",
-    "lint": "./node_modules/.bin/standard --fix --ignore-pattern dist/",
+    "lint": "./node_modules/.bin/standard --fix",
     "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
   },
   "dependencies": {
