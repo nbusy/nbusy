@@ -21,10 +21,9 @@
   "devDependencies": {
     "babel-cli": "6.11.4",
     "babel-eslint": "6.1.2",
-    "babel-jest": "14.1.0",
     "jest-cli": "14.1.0",
     "jsonwebtoken": "7.1.9",
-    "standard": "7.1.2"
+    "standard": "8.0.0"
   },
   "repository": {
     "type": "git",
