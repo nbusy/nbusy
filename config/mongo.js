@@ -23,7 +23,6 @@ mongodb.connect = async function (url) {
   // export default collections
   mongodb.counters = db.collection('counters')
   mongodb.users = db.collection('users')
-  mongodb.messages = db.collection('messages')
 }
 
 /**

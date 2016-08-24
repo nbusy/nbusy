@@ -1,13 +1,9 @@
-// todo: add test for getNextSequence()
-
-// todo: http://mongodb.github.io/node-mongodb-native/2.2/reference/ecmascript6/crud/
-
 jest.disableAutomock()
 
 const mongo = require('../config/mongo')
 
 describe('mongo', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     // todo: seed database
   })
 
@@ -19,6 +15,10 @@ describe('mongo', () => {
     it('should disconnect existing connection', async () => {
 
     })
+  })
+  
+  describe('CRUD', () => {
+    // todo: http://mongodb.github.io/node-mongodb-native/2.2/reference/ecmascript6/crud/
   })
 
   describe('getNextSequence()', () => {
