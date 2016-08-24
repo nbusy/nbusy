@@ -4,4 +4,4 @@ const asyncFun = require('./asyncFun')
 
 console.log('top level: ', asyncFun.asyncResult)
 
-require('./aws/dynamodb').printTableNames()
+require('./config/dynamodb').printTableNames()
