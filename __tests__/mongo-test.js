@@ -2,14 +2,13 @@
 
 // todo: http://mongodb.github.io/node-mongodb-native/2.2/reference/ecmascript6/crud/
 
-// jest.enableAutomock();
+jest.disableAutomock()
 
 const mongo = require('../config/mongo')
-const mongoSeed = require('../config/mongo-seed')
 
 describe('mongo', () => {
   beforeEach(() => {
-    mongoSeed.seed(true)
+    // todo: seed database
   })
 
   describe('connect()', () => {
