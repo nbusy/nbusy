@@ -23,21 +23,7 @@ const users = [
       {
         _id: new ObjectID(),
         peers: [{_id: 2, name: 'Chuck Norris', picture: '/api/users/2/picture'}],
-        sent: getTime(-26),
-        messages: [
-          {
-            _id: new ObjectID(),
-            from: {_id: 2, name: 'Chuck Norris', picture: '/api/users/2/picture'},
-            createdTime: getTime(-26),
-            message: 'Also remember that, if you can read this, you are within range of Chuck!'
-          },
-        ]
-      },
-      {
-        _id: new ObjectID(),
-        from: {_id: 1, name: 'Morgan the Almighty', picture: '/api/users/1/picture'},
-        sent: getTime(-24),
-        messages: []
+        sent: getTime(-26)
       }
     ]
   },
@@ -73,11 +59,9 @@ function * seed (overwrite) {
     // now populate collections with fresh data
     yield mongo.counters.insert({_id: 'userId', seq: users.length})
     yield mongo.users.insert(users)
-    yield mongo.posts.insert(posts)
   }
 }
 
 // export seed data and seed function
 seed.users = users
-seed.posts = posts
 module.exports = seed
