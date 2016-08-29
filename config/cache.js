@@ -4,7 +4,7 @@
  * In-memory object cache. Destined to use Redis in the future.
  */
 
-var mongo = require('../config/mongo')
+var mongo = require('mongo-cols')
 
 exports.init = function *() {
   this.users = yield mongo.users.find({}, {email: 1, name: 1}).toArray()

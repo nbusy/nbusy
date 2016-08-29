@@ -2,7 +2,7 @@
  * Seed data for mongo database.
  */
 
-const mongo = require('./mongo')
+const mongo = require('./mongo-cols')
 const config = require('./config')
 
 const ObjectID = mongo.ObjectID
