@@ -13,22 +13,21 @@ exports.connect = async function (url) {
   }
 
   // export mongo db instance
-  const db = exports.db = await mongodb.MongoClient.connect(url)
+  exports.db = await mongodb.MongoClient.connect(url)
 
   // export default collections
-  exports.counters = await db.collection('counters')
-  exports.users = await db.collection('users')
+  exports.counters = await exports.db.collection('counters')
+  exports.users = await exports.db.collection('users')
 }
 
 /**
  * Generates sequential integer IDs for collection auto increment fields.
  */
 exports.incrementAndGetCounter = async function (counterName) {
-  const results = await mongodb.counters.findAndModify(
+  const results = await mongodb.counters.findOneAndUpdate(
     {_id: counterName},
-    [],
     {$inc: {seq: 1}},
-    {new: true}
+    {returnNewDocument: true}
   )
   return results.value.seq
 }
