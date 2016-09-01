@@ -7,7 +7,8 @@ describe('mongo', () => {
 
   describe('connect()', () => {
     it('should connect', async () => {
-      await mongo.connect('mongodb://localhost:27017/koan-test')
+      await mongo.connect('mongodb://localhost:27017/nbusy-test')
+      await mongo.db.close()
     })
 
     it('should disconnect existing connection', async () => {
