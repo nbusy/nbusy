@@ -1,5 +1,3 @@
-jest.disableAutomock()
-
 const mongo = require('../config/mongo-cols')
 
 describe('mongo', () => {
