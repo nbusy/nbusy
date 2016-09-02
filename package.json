@@ -14,14 +14,15 @@
     "aws-sdk": "2.5.4",
     "babel-preset-es2017": "6.14.0",
     "babel-register": "6.14.0",
-    "bluebird": "3.4.5",
+    "bluebird": "3.4.6",
     "googleapis": "12.4.0",
     "mongodb": "2.2.9"
   },
   "devDependencies": {
     "babel-cli": "6.14.0",
     "babel-eslint": "6.1.2",
-    "jest-cli": "15.0.2",
+    "flow": "0.2.3",
+    "jest-cli": "15.1.0",
     "jsonwebtoken": "7.1.9",
     "standard": "8.0.0"
   },
