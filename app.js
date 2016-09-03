@@ -3,5 +3,5 @@
  */
 
 require('babel-register')
-const promisifyAll = require('bluebird').promisifyAll
+// const promisifyAll = require('bluebird').promisifyAll
 

@@ -2,10 +2,11 @@
  * Seed data for mongo database.
  */
 
-const mongo = require('./mongo-cols')
+const mongodb = require('mongodb')
+const mongocols = require('./mongo-cols')
 const config = require('./config')
 
-const ObjectID = mongo.ObjectID
+const ObjectID = mongodb.ObjectID
 const now = new Date()
 
 function getTime (h) {
@@ -40,14 +41,14 @@ const users = [
  * @param overwrite Overwrite existing database even if it is not empty.
  */
 function * seed (overwrite) {
-  var count = yield mongo.users.count({}, {limit: 1})
+  var count = yield mongocols.users.count({}, {limit: 1})
   if (overwrite || count === 0) {
     // first remove any leftover data in collections
     var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */
-    for (var collection in mongo) {
-      if (mongo[collection].drop) {
+    for (var collection in mongocols) {
+      if (mongocols[collection].drop) {
         try {
-          yield mongo[collection].drop()
+          yield mongocols[collection].drop()
         } catch (err) {
           if (err.message !== collerrmsg) {
             throw err
@@ -57,8 +58,8 @@ function * seed (overwrite) {
     }
 
     // now populate collections with fresh data
-    yield mongo.counters.insert({_id: 'userId', seq: users.length})
-    yield mongo.users.insert(users)
+    yield mongocols.counters.insert({_id: 'userId', seq: users.length})
+    yield mongocols.users.insert(users)
   }
 }
 

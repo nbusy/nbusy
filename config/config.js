@@ -2,12 +2,12 @@
  * Environment variables and application configuration.
  */
 
-const path = require('path'),
-  _ = require('lodash') // todo: we need to do this without lodash
+const path = require('path')
+const _ = require('lodash')
 
 var baseConfig = {
   app: {
-    root: path.normalize(__dirname + '/../..'),
+    root: path.normalize(path.join(__dirname, '/..')),
     env: process.env.NODE_ENV,
     secret: process.env.SECRET || 'secret key' /* used in signing the jwt tokens */,
     pass: process.env.PASS || 'pass' /* generic password for seed user logins */

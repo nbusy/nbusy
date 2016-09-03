@@ -1,4 +1,4 @@
-const mongo = require('../config/mongo-cols')
+const mongocols = require('../config/mongo-cols')
 
 describe('mongo', () => {
   beforeEach(async () => {
@@ -7,8 +7,8 @@ describe('mongo', () => {
 
   describe('connect()', () => {
     it('should connect', async () => {
-      await mongo.connect('mongodb://localhost:27017/nbusy-test')
-      await mongo.db.close()
+      await mongocols.connect('mongodb://localhost:27017/nbusy-test')
+      await mongocols.db.close()
     })
 
     it('should disconnect existing connection', async () => {
