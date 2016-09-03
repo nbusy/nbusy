@@ -6,7 +6,7 @@ const path = require('path')
 const _ = require('lodash')
 
 function init () {
-  var baseConfig = {
+  const baseConfig = {
     app: {
       root: path.normalize(path.join(__dirname, '/..')),
       env: process.env.NODE_ENV,
@@ -16,7 +16,7 @@ function init () {
   }
 
   // environment specific config overrides
-  var platformConfig = {
+  const platformConfig = {
     development: {
       app: {
         port: 3000
@@ -48,8 +48,8 @@ function init () {
 
   // override the base configuration with the platform specific values
   module.exports = _.merge(baseConfig, platformConfig[process.env.NODE_ENV || (baseConfig.app.env = 'development')])
-
   module.exports.init = init
+  return module.exports
 }
 
 init()

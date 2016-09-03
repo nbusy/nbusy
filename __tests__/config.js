@@ -17,8 +17,8 @@ describe('config', () => {
 
   it('env=dev', () => {
     process.env.NODE_ENV = 'development'
-    config.init()
-    expect(config.app.env).toBe('development')
-    expect(config.app.port).toBe(3000)
+    const conf = config.init()
+    expect(conf.app.env).toBe('development')
+    expect(conf.app.port).toBe(3000)
   })
 })
