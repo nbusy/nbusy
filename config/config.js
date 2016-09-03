@@ -17,7 +17,7 @@ function init () {
 
   // environment specific config overrides
   const platformConfig = {
-    development: {
+    dev: {
       app: {
         port: 3000
       },
@@ -35,13 +35,12 @@ function init () {
       }
     },
 
-    production: {
+    prod: {
       app: {
         port: process.env.PORT || 3000,
-        cacheTime: 7 * 24 * 60 * 60 * 1000 /* default caching time (7 days) for static files, calculated in milliseconds */
       },
       mongo: {
-        url: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/nbusy'
+        url: process.env.MONGODB_URI || 'mongodb://localhost:27017/nbusy'
       }
     }
   }

@@ -16,9 +16,19 @@ describe('config', () => {
   })
 
   it('env=dev', () => {
-    process.env.NODE_ENV = 'development'
+    process.env.NODE_ENV = 'dev'
     const conf = config.init()
-    expect(conf.app.env).toBe('development')
+    expect(conf.app.env).toBe('dev')
     expect(conf.app.port).toBe(3000)
+  })
+
+  it('env=prod', () => {
+    process.env.NODE_ENV = 'prod'
+    process.env.MONGODB_URI = 'somemongo'
+    process.env.PORT = 9000
+    const conf = config.init()
+    expect(conf.app.env).toBe('prod')
+    expect(conf.app.port).toBe('9000')
+    expect(conf.mongo.url).toBe('somemongo')
   })
 })
