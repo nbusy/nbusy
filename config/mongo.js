@@ -55,7 +55,8 @@ mongodb.incrementAndGetCounter = async function (counterName) {
   const results = await mongodb.counters.findOneAndUpdate(
     {_id: counterName},
     {$inc: {seq: 1}},
-    {returnNewDocument: true}
+    {returnOriginal: false}
   )
+
   return results.value.seq
 }
