@@ -43,8 +43,8 @@ mongodb.seed = async function (overwrite) {
     }
 
     // now populate collections with fresh data
-    await mongodb.counters.insert({_id: 'userId', seq: seed.users.length})
-    await mongodb.users.insert(seed.users)
+    await mongodb.counters.insertOne({_id: 'userId', seq: seed.users.length})
+    await mongodb.users.insertMany(seed.users)
   }
 }
 
