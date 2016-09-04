@@ -37,7 +37,7 @@ function init () {
 
     prod: {
       app: {
-        port: process.env.PORT || 3000,
+        port: process.env.PORT || 3000
       },
       mongo: {
         url: process.env.MONGODB_URI || 'mongodb://localhost:27017/nbusy'

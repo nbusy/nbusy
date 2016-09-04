@@ -38,7 +38,7 @@ const users = [
 
 /**
  * Populates the database with seed data.
- * @param overwrite Overwrite existing database even if it is not empty.
+ * @param overwrite - Overwrite existing database even if it is not empty.
  */
 function * seed (overwrite) {
   var count = yield mongocols.users.count({}, {limit: 1})

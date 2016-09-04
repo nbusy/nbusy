@@ -1,3 +1,7 @@
+/**
+ * AWS DynamoDB storage support.
+ */
+
 const AWS = require('aws-sdk')
 
 AWS.config.endpoint = 'http://localhost:8000'
