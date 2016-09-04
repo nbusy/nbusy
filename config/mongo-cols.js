@@ -9,7 +9,7 @@ const mongodb = require('mongodb')
  */
 exports.connect = async function (url) {
   if (exports.db) {
-    console.log('closing existing mongodb connection:', await exports.db.close())
+    await exports.db.close()
   }
 
   // export mongo db instance
