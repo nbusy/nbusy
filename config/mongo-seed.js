@@ -40,15 +40,15 @@ const users = [
  * Populates the database with seed data.
  * @param overwrite - Overwrite existing database even if it is not empty.
  */
-function * seed (overwrite) {
-  var count = yield mongocols.users.count({}, {limit: 1})
+async function seed (overwrite) {
+  var count = await mongocols.users.count({}, {limit: 1})
   if (overwrite || count === 0) {
     // first remove any leftover data in collections
     var collerrmsg = 'ns not found' /* indicates 'collection not found' error in mongo which is ok */
     for (var collection in mongocols) {
       if (mongocols[collection].drop) {
         try {
-          yield mongocols[collection].drop()
+          await mongocols[collection].drop()
         } catch (err) {
           if (err.message !== collerrmsg) {
             throw err
@@ -58,8 +58,8 @@ function * seed (overwrite) {
     }
 
     // now populate collections with fresh data
-    yield mongocols.counters.insert({_id: 'userId', seq: users.length})
-    yield mongocols.users.insert(users)
+    await mongocols.counters.insert({_id: 'userId', seq: users.length})
+    await mongocols.users.insert(users)
   }
 }
 

@@ -1,28 +1,26 @@
 const config = require('../config/config')
 const mongocols = require('../config/mongo-cols')
+const mongoseed = require('../config/mongo-seed')
 
 describe('mongo', () => {
-  describe('connect()', () => {
-    it('should connect', async () => {
-      await mongocols.connect(config.mongo.url)
-      await mongocols.db.close()
-    })
-
-    it('should disconnect existing connection', async () => {
-      await mongocols.connect(config.mongo.url)
-      await mongocols.connect(config.mongo.url)
-      await mongocols.connect(config.mongo.url)
-      await mongocols.db.close()
-    })
+  it('connect()', async () => {
+    await mongocols.connect(config.mongo.url)
+    await mongocols.connect(config.mongo.url)
+    await mongocols.connect(config.mongo.url)
+    await mongocols.db.close()
   })
 
-  describe('getNextSequence()', () => {
-    it('should increment and get counter', async () => {
-
-    })
+  it('seed()', async () => {
+    await mongocols.connect(config.mongo.url)
+    await mongoseed(true)
+    await mongocols.db.close()
   })
 
-  describe('seed()', () => {
-    // todo: http://mongodb.github.io/node-mongodb-native/2.2/reference/ecmascript6/crud/
+  it('getNextSequence()', async () => {
+    await mongocols.connect(config.mongo.url)
+    await mongoseed(true)
+    const c = await mongocols.incrementAndGetCounter('userId')
+    expect(c).toBe(mongoseed.users.length)
+    await mongocols.db.close()
   })
 })

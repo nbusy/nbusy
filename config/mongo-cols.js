@@ -24,7 +24,7 @@ exports.connect = async function (url) {
  * Generates sequential integer IDs for collection auto increment fields.
  */
 exports.incrementAndGetCounter = async function (counterName) {
-  const results = await mongodb.counters.findOneAndUpdate(
+  const results = await exports.counters.findOneAndUpdate(
     {_id: counterName},
     {$inc: {seq: 1}},
     {returnNewDocument: true}
