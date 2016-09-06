@@ -2,11 +2,11 @@
  * WebSocket server for serving routes defined in /routes directory.
  */
 
-var WebSocketServer = require('ws').Server,
-  url = require('url'),
-  jwt = require('koa-jwt'),
-  _ = require('lodash'),
-  config = require('../config/config');
+const WebSocketServer = require('ws').Server
+const url = require('url')
+const jwt = require('jsonwebtoken')
+const _ = require('lodash')
+const config = require('../config/config')
 
 /**
  * Creates and attaches a WebSocket server to a given HTTP server with the same host URI.
