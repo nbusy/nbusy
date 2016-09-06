@@ -34,3 +34,10 @@ exports.users = [
     name: 'Chuck Norris'
   }
 ]
+
+exports.counters = [
+  {
+    _id: 'userId',
+    seq: exports.users.length
+  }
+]
