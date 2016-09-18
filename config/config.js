@@ -46,7 +46,7 @@ function init () {
   }
 
   // override the base configuration with the platform specific values
-  module.exports = _.merge(baseConfig, platformConfig[process.env.NODE_ENV || (baseConfig.app.env = 'development')])
+  module.exports = _.merge(baseConfig, platformConfig[process.env.NODE_ENV || (baseConfig.app.env = 'dev')])
   module.exports.init = init
   return module.exports
 }

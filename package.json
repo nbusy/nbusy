@@ -5,7 +5,7 @@
     "node": ">=6.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node babel.js",
     "test": "jest",
     "lint": "./node_modules/.bin/standard --fix",
     "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
