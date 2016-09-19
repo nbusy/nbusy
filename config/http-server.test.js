@@ -19,7 +19,7 @@ describe('httpServer', () => {
   })
 
   it('replies all requests with 426', async () => {
-    const res = await fetch('http://localhost:3001')
+    const res = await fetch('http://127.0.0.1:3001')
     expect(res.status).toBe(426)
   })
 })

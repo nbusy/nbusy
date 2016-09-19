@@ -13,9 +13,9 @@ exports.server = http.createServer((req, res) => {
 })
 
 exports.listen = async () => {
-  await exports.server.listenAsync(config.app.port, 'localhost')
+  await exports.server.listenAsync(config.app.port, '127.0.0.1')
   if (config.app.env !== 'test') {
-    console.log(`Server running at http://localhost:${config.app.port}/`)
+    console.log(`Server running at http://127.0.0.1:${config.app.port}/`)
   }
 }
 

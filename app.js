@@ -18,7 +18,7 @@ exports.init = async function (overwriteDB) {
   exports.server = httpServer.server
   ws.listen(exports.server)
   if (config.app.env !== 'test') {
-    console.log('NBusy server listening on port ' + config.app.port)
+    console.log(`NBusy server running at http://127.0.0.1:${config.app.port}/`)
   }
 }
 
