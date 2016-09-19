@@ -1,11 +1,25 @@
-// const fetch = require('node-fetch')
+const fetch = require('node-fetch')
+const http = require('./http')
 
-function sum (a, b) {
-  return Promise.resolve(a + b)
-}
+describe('http', () => {
+  beforeEach(async () => {
+    await http.listen()
+  })
 
-describe('sum', () => {
-  it('adds 1 + 2 to equal 3', async () => {
-    expect(await sum(1, 2)).toBe(3)
+  afterEach(async () => {
+    await http.close()
+  })
+
+  it('opens/closes synchronously', async () => {
+    expect(http.server.listening).toBe(true)
+    await http.close()
+    expect(http.server.listening).toBe(false)
+    await http.listen()
+    expect(http.server.listening).toBe(true)
+  })
+
+  it('replies all requests with 426', async () => {
+    const res = await fetch('http://localhost:3001')
+    expect(res.status).toBe(426)
   })
 })
