@@ -1,5 +1,5 @@
 /**
- * Test to make sure that Babel configuration is work properly and with Jest testing.
+ * Test to make sure that Babel/ES2017+ configuration is working properly with Jest.
  */
 
 function sum (a, b) {
