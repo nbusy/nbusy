@@ -1,6 +1,6 @@
-const config = require('../config/config')
-const mongo = require('../config/mongo')
-const seed = require('../config/seed')
+const config = require('config')
+const mongo = require('mongo')
+const seed = require('seed')
 
 describe('mongo', () => {
   it('connect()', async () => {

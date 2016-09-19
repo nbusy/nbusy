@@ -2,7 +2,7 @@
  * Tests for environment configurations.
  */
 
-const config = require('../config/config')
+const config = require('config')
 const env = process.env.NODE_ENV
 
 describe('config', () => {
