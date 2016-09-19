@@ -11,12 +11,14 @@ const config = require('../config/config')
 /**
  * Creates and attaches a WebSocket server to a given HTTP server with the same host URI.
  * @param server Node.js HTTP server instance.
+ * @param port If no HTTP server instance is provided, one will be created on this port.
  * @returns {WebSocketServer}
  */
-exports.listen = function (server) {
+exports.listen = function (server, port) {
   // create a new WebSocket server and start listening on the same port as the given http server but with ws:// protocol
   exports.wss = new WebSocketServer({
     server: server,
+    port: port,
     verifyClient: (info) => {
       // validate the connecting client's access token
       // validator function attaches user details to the request object if token is valid

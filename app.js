@@ -2,7 +2,6 @@
  * NBusy application entry point.
  */
 
-const httpServer = require('./config/http-server')
 const config = require('./config/config')
 const mongo = require('./config/mongo')
 const ws = require('./config/ws')
@@ -15,8 +14,7 @@ exports.init = async function (overwriteDB) {
   await mongo.connect(config.mongo.url)
   await mongo.seed(overwriteDB)
 
-  exports.server = httpServer.server
-  ws.listen(exports.server)
+  ws.listen(null, config.app.port)
   if (config.app.env !== 'test') {
     console.log(`NBusy server running at http://127.0.0.1:${config.app.port}/`)
   }

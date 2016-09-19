@@ -7,6 +7,8 @@ const http = promisifyAll(require('http'))
 const config = require('./config')
 
 exports.server = http.createServer((req, res) => {
+  // todo: do authentication here
+
   // currently this is a websocket only server so always reply with upgrade-required
   res.statusCode = 426
   res.end()
