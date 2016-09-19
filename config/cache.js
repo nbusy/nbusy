@@ -6,8 +6,8 @@
 
 var mongo = require('./mongo')
 
-exports.init = function *() {
-  this.users = yield mongo.users.find({}, {email: 1, name: 1}).toArray()
+exports.init = async function () {
+  this.users = await mongo.users.find({}, {email: 1, name: 1}).toArray()
 
   this.users.forEach(function (user) {
     user.picture = '/api/users/' + user._id + '/picture'
