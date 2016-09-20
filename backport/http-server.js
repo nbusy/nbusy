@@ -2,7 +2,7 @@
  * HTTP server configuration.
  */
 
-const promisifyAll = require('bluebird').promisifyAll
+const promisifyAll = require('bluebird').promisifyAll // todo: probably we should only promisify needed methods, or use basic promise resolution
 const http = promisifyAll(require('http'))
 const config = require('./../config/config')
 

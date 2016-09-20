@@ -14,7 +14,7 @@ const config = require('../config/config')
  * @param port If no HTTP server instance is provided, one will be created on this port.
  * @returns {WebSocketServer}
  */
-exports.listen = function (server, port) {
+exports.listen = (server, port) => {
   // create a new WebSocket server and start listening on the same port as the given http server but with ws:// protocol
   exports.wss = new WebSocketServer({
     server: server,
@@ -83,7 +83,7 @@ exports.clients = []
  * @param method - Remote method to execute in the connected client.
  * @param params - Array or object containing method parameters as defined in JSON-RPC 2.0 specs.
  */
-exports.notify = function (recipients, method, params) {
+exports.notify = (recipients, method, params) => {
   if (!Array.isArray(recipients)) {
     params = method
     method = recipients
