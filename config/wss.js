@@ -13,9 +13,10 @@ const _ = require('lodash')
  * @param port - If no HTTP server instance is provided, one will be created on this port.
  * @param secret - Secret used for decrypting JWT tokens.
  * @param log - Enables client conn/disconn event logging.
+ * @param msgHandler - Incoming message handler function
  * @returns {WebSocketServer}
  */
-exports.listen = ({server, port = 3000, secret = 'secret', log = true}) => {
+exports.listen = ({server, port = 3000, secret = 'secret', log = true, msgHandler = (ws, data) => {}}) => {
   // create a new WebSocket server and start listening on the same port as the given http server but with ws:// protocol
   exports.server = new WebSocketServer({
     server: server,
@@ -63,9 +64,7 @@ exports.listen = ({server, port = 3000, secret = 'secret', log = true}) => {
     })
 
     ws.on('message', function (data) {
-      if (data !== 'ping') {
-        console.log('An unexpected WebSocket message received from client with data: %s', JSON.parse(data))
-      }
+      msgHandler(ws, data)
     })
   })
 

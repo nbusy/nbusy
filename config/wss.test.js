@@ -8,7 +8,7 @@ const url = `ws://127.0.0.1:${config.app.port}`
 
 describe('ws', () => {
   beforeEach(() => {
-    wss.listen({port: config.app.port, secret: config.app.secret, log: false})
+    wss.listen({port: config.app.port, secret: config.app.secret, log: false, msgHandler: (ws, data) => ws.send(data)})
   })
 
   afterEach(() => {
