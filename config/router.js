@@ -4,13 +4,16 @@
 
 exports.get = () => {
   return {
-    routes: [],
-    mid (ws, data) {
+    routes: {},
+    middleware (ws, data) {
       const msg = JSON.parse(data)
-
+      const r = this.routes[msg.method]
+      if (r) {
+        r(ws, msg)
+      }
     },
-    add (route) {
-      this.routes.push(route)
+    add ({method, handler}) {
+      this.routes[method] = handler
     }
   }
 }
