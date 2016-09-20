@@ -16,7 +16,7 @@ const config = require('../config/config')
  */
 exports.listen = (server, port) => {
   // create a new WebSocket server and start listening on the same port as the given http server but with ws:// protocol
-  exports.wss = new WebSocketServer({
+  exports.server = new WebSocketServer({
     server: server,
     port: port,
     verifyClient: (info) => {
@@ -36,7 +36,7 @@ exports.listen = (server, port) => {
   })
 
   // WebSocket event that is fired when a new client is validated and connected
-  exports.wss.on('connection', (ws) => {
+  exports.server.on('connection', (ws) => {
     const user = ws.upgradeReq.user
     console.log('A new WebSocket client connected with ID: ' + user.id)
 
@@ -68,7 +68,7 @@ exports.listen = (server, port) => {
     })
   })
 
-  return exports.wss
+  return exports.server
 }
 
 /**

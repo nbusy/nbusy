@@ -12,8 +12,7 @@ describe('ws', () => {
   })
 
   afterEach(() => {
-    // todo: ws.wss -> wss only
-    wss.wss.close()
+    wss.server.close()
   })
 
   it('connect', () => {
