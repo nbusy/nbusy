@@ -22,13 +22,13 @@ describe('ws', () => {
     const ping = new Promise(resolve => {
       ws.on('open', function open () {
         ws.send('ping')
-        ping.resolve()
+        resolve()
       })
     })
 
     const msg = new Promise(resolve => {
       ws.on('message', function (data, flags) {
-        msg.resolve()
+        resolve(data)
       })
     })
 
