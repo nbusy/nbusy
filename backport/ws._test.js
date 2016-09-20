@@ -1,8 +1,8 @@
 const WebSocket = require('ws')
 const jwt = require('jsonwebtoken')
-const config = require('./config')
+const config = require('./../config/config')
 const ws = require('./ws')
-const seed = require('./seed')
+const seed = require('./../config/seed')
 
 const url = `ws://127.0.0.1:${config.app.port}`
 
@@ -20,16 +20,16 @@ describe('ws', () => {
     const ws = new WebSocket(`${url}?access_token=${token}`)
 
     const ping = new Promise(() => {})
-    ws.on('open', function open() {
-      ws.send('ping');
+    ws.on('open', function open () {
+      ws.send('ping')
       ping.resolve()
-    });
+    })
 
     const msg = new Promise(() => {})
-    ws.on('message', function(data, flags) {
+    ws.on('message', function (data, flags) {
       console.log(data)
       msg.resolve()
-    });
+    })
 
     return Promise.all([ping, msg])
   })

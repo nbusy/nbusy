@@ -4,7 +4,7 @@
 
 const promisifyAll = require('bluebird').promisifyAll
 const http = promisifyAll(require('http'))
-const config = require('./config')
+const config = require('./../config/config')
 
 exports.server = http.createServer((req, res) => {
   // todo: do authentication here
