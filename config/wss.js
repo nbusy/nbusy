@@ -12,6 +12,7 @@ const _ = require('lodash')
  * @param server - Node.js HTTP server instance.
  * @param port - If no HTTP server instance is provided, one will be created on this port.
  * @param secret - Secret used for decrypting JWT tokens.
+ * @param log - Enables client conn/disconn event logging.
  * @returns {WebSocketServer}
  */
 exports.listen = ({server, port = 3000, secret = 'secret', log = true}) => {
