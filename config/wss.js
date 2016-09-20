@@ -6,15 +6,15 @@ const WebSocketServer = require('ws').Server
 const url = require('url')
 const jwt = require('jsonwebtoken')
 const _ = require('lodash')
-const config = require('../config/config')
 
 /**
  * Creates and attaches a WebSocket server to a given HTTP server with the same host URI.
- * @param server Node.js HTTP server instance.
- * @param port If no HTTP server instance is provided, one will be created on this port.
+ * @param server - Node.js HTTP server instance.
+ * @param port - If no HTTP server instance is provided, one will be created on this port.
+ * @param secret - Secret used for decrypting JWT tokens.
  * @returns {WebSocketServer}
  */
-exports.listen = (server, port) => {
+exports.listen = ({server, port = 3000, secret = 'secret', log = true}) => {
   // create a new WebSocket server and start listening on the same port as the given http server but with ws:// protocol
   exports.server = new WebSocketServer({
     server: server,
@@ -27,7 +27,7 @@ exports.listen = (server, port) => {
 
       // attach the user info to the request context if the token is valid
       try {
-        info.req.user = jwt.verify(accessToken, config.app.secret)
+        info.req.user = jwt.verify(accessToken, secret)
       } catch (e) {
       }
 
@@ -38,7 +38,7 @@ exports.listen = (server, port) => {
   // WebSocket event that is fired when a new client is validated and connected
   exports.server.on('connection', (ws) => {
     const user = ws.upgradeReq.user
-    console.log('A new WebSocket client connected with ID: ' + user.id)
+    log && console.log('A new WebSocket client connected with ID: ' + user.id)
 
     // associate connecting user ID with WebSocket connection in the clients dictionary
     if (exports.clients[user.id]) {
@@ -48,7 +48,7 @@ exports.listen = (server, port) => {
     }
 
     ws.on('close', function () {
-      console.log('A WebSocket client with ID: ' + user.id + ' disconnected.')
+      log && console.log('A WebSocket client with ID: ' + user.id + ' disconnected.')
       if (exports.clients[user.id].length === 1) {
         exports.clients[user.id] = null // exports.clients.splice(user.id, 1); // this is the correct way but this also shifts all elements indexes which spoils the design here..
       } else {

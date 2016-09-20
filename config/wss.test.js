@@ -8,7 +8,7 @@ const url = `ws://127.0.0.1:${config.app.port}`
 
 describe('ws', () => {
   beforeEach(() => {
-    wss.listen(null, config.app.port)
+    wss.listen({port: config.app.port, secret: config.app.secret, log: false})
   })
 
   afterEach(() => {
@@ -28,8 +28,7 @@ describe('ws', () => {
     })
 
     const msg = new Promise(resolve => {
-      ws.on('message', function (data, flags) {
-        console.log(`client received: ${data}`)
+      ws.on('message', function (data) {
         resolve(data)
       })
     })
