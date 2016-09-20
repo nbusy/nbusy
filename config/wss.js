@@ -8,6 +8,12 @@ const jwt = require('jsonwebtoken')
 const _ = require('lodash')
 
 /**
+ * Dictionary (array of arrays) to math connected user IDs with connected clients (i.e. one user might be connected from multiple devices).
+ * Array index is the client ID and the stored value is also an array with socket client objects. i.e. clients[33452234]: [ws1, ws2, ws3...]
+ */
+exports.clients = []
+
+/**
  * Creates and attaches a WebSocket server to a given HTTP server with the same host URI.
  * @param server - Node.js HTTP server instance.
  * @param port - If no HTTP server instance is provided, one will be created on this port.
@@ -70,12 +76,6 @@ exports.listen = ({server, port = 3000, secret = 'secret', log = true, msgHandle
 
   return exports.server
 }
-
-/**
- * Dictionary (array of arrays) to math connected user IDs with connected clients (i.e. one user might be connected from multiple devices).
- * Array index is the client ID and the stored value is also an array with socket client objects. i.e. clients[33452234]: [ws1, ws2, ws3...]
- */
-exports.clients = []
 
 /**
  * A JSON-RPC 2.0 implementation over WebSockets. Sends a one way notifications to all designated recipients with given data and method.
