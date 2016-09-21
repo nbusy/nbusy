@@ -4,6 +4,11 @@ const router = require('./router')
 describe('router', () => {
   it('routes', async () => {
     const r = router.get()
-    r.add({route: 'wow', handler: () => {}})
+    const m = {method: 'wow'}
+
+    r.add('wow', (ws, msg) => {
+      expect(msg).toEqual(m)
+    })
+    r.middleware(null, JSON.stringify(m))
   })
 })

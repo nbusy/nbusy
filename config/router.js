@@ -12,7 +12,7 @@ exports.get = () => {
         r(ws, msg)
       }
     },
-    add ({method, handler}) {
+    add (method, handler) {
       this.routes[method] = handler
     }
   }
