@@ -8,7 +8,6 @@ require('babel-register')
 const app = require('./app')
 
 app.init().catch((err) => {
-  console.error(err.stack)
+  console.error(err)
   process.exit(1)
 })
-

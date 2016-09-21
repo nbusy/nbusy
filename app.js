@@ -17,7 +17,7 @@ exports.init = async function (overwriteDB) {
 // auto init if this app is not being initialized by another module (i.e. using require('./app').init();)
 if (!module.parent) {
   exports.init().catch((err) => {
-    console.error(err.stack)
+    console.error(err)
     process.exit(1)
   })
 }
