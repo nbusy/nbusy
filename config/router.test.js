@@ -1,4 +1,3 @@
-const wss = require('./wss')
 const router = require('./router')
 
 describe('router', () => {
