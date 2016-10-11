@@ -6,7 +6,7 @@ exports.tokeninfo = async (token, db) => {
     throw new Error('authentication failed')
   }
 
-  body = await res.json()
+  const body = await res.json()
 
   if (db) {
     // persist user details
