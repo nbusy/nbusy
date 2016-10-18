@@ -25,7 +25,7 @@
   "devDependencies": {
     "babel-cli": "6.16.0",
     "babel-eslint": "7.0.0",
-    "flow": "0.2.3",
+    "flow-bin": "0.33.0",
     "jest-cli": "16.0.1",
     "standard": "8.4.0"
   },
