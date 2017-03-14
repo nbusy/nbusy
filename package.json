@@ -2,32 +2,27 @@
   "name": "nbusy",
   "description": "NBusy messaging server.",
   "engines": {
-    "node": ">=6.0"
+    "node": ">=7.6"
   },
   "scripts": {
-    "start": "node babel.js",
+    "start": "node app.js",
     "test": "jest",
-    "lint": "./node_modules/.bin/standard --fix",
-    "build": "./node_modules/.bin/babel ./ --out-dir dist --ignore ./node_modules"
+    "lint": "./node_modules/.bin/standard --fix"
   },
   "dependencies": {
-    "babel-preset-es2017": "6.16.0",
-    "babel-register": "6.16.3",
-    "bluebird": "3.4.6",
-    "bufferutil": "1.2.1",
-    "jsonwebtoken": "7.1.9",
-    "lodash": "4.16.4",
-    "mongodb": "2.2.10",
+    "bufferutil": "3.0.0",
+    "jsonwebtoken": "7.3.0",
+    "lodash": "4.17.4",
+    "mongodb": "2.2.24",
     "node-fetch": "1.6.3",
-    "utf-8-validate": "1.2.1",
-    "ws": "1.1.1"
+    "utf-8-validate": "3.0.1",
+    "ws": "2.2.1"
   },
   "devDependencies": {
-    "babel-cli": "6.16.0",
-    "babel-eslint": "7.0.0",
-    "flow-bin": "0.33.0",
-    "jest-cli": "16.0.1",
-    "standard": "8.4.0"
+    "babel-eslint": "7.1.1",
+    "flow-bin": "0.41.0",
+    "jest-cli": "19.0.2",
+    "standard": "9.0.1"
   },
   "repository": {
     "type": "git",
@@ -40,10 +35,5 @@
       "node": true,
       "jest": true
     }
-  },
-  "babel": {
-    "presets": [
-      "es2017"
-    ]
   }
 }
