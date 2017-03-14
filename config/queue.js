@@ -1,4 +1,3 @@
 /**
  * Persistent message queue.
  */
-
